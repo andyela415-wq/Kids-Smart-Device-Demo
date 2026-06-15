@@ -1,0 +1,66 @@
+export const MODES = {
+  study: {
+    id: 'study',
+    icon: '📚',
+    label: '学习',
+    setupTitle: '学习模式',
+    defaultInterval: 25,
+    defaultDuration: 60,
+    intervalPresets: [5, 10, 25],
+    durationPresets: [30, 45, 60],
+    restMinutes: 5,
+    voiceReminder: '你已经学习25分钟啦，休息一下吧',
+    voiceComplete: '你完成了一轮学习，休息一下吧！',
+    taskLabel: '学习数学',
+    color: '#5eb8ff',
+  },
+  water: {
+    id: 'water',
+    icon: '💧',
+    label: '喝水',
+    setupTitle: '喝水提醒',
+    defaultInterval: 30,
+    defaultDuration: 120,
+    intervalPresets: [15, 30, 45],
+    restMinutes: 0,
+    voiceReminder: '小朋友，该喝口水啦。',
+    voiceComplete: '小朋友，该喝口水啦。',
+    taskLabel: '喝水休息',
+    color: '#5ecfff',
+  },
+  read: {
+    id: 'read',
+    icon: '📖',
+    label: '阅读',
+    setupTitle: '阅读模式',
+    defaultInterval: 20,
+    defaultDuration: 60,
+    intervalPresets: [10, 20, 30],
+    durationPresets: [30, 45, 60],
+    restMinutes: 5,
+    voiceReminder: '阅读时间结束啦，你今天又读完了一段内容',
+    voiceComplete: '阅读时间结束啦，你今天又读完了一段内容',
+    taskLabel: '阅读书本',
+    color: '#7ee8a2',
+  },
+  custom: {
+    id: 'custom',
+    icon: '➕',
+    label: '自定义',
+    setupTitle: '自定义模式',
+    defaultInterval: 20,
+    defaultDuration: 60,
+    intervalPresets: [5, 10, 20],
+    restMinutes: 5,
+    voiceReminder: '时间到啦，休息一下吧',
+    voiceComplete: '太棒啦，你完成了一轮！',
+    taskLabel: '我的任务',
+    color: '#ffb347',
+  },
+}
+
+export const MODE_LIST = ['study', 'water', 'read', 'custom']
+
+export function getMode(id) {
+  return MODES[id] || MODES.study
+}

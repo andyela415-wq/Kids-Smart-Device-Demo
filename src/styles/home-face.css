@@ -1,0 +1,204 @@
+@import './variables.css';
+
+.os-home {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+}
+
+.home-face__sleep {
+  position: absolute;
+  top: calc(10 * var(--ui-px));
+  right: calc(12 * var(--ui-px));
+  z-index: 2;
+  width: calc(26 * var(--ui-px));
+  height: calc(26 * var(--ui-px));
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(200, 198, 192, 0.88);
+}
+
+.home-face__sleep-icon {
+  width: calc(14 * var(--ui-px));
+  height: calc(14 * var(--ui-px));
+}
+
+.home-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  background: #000;
+  box-sizing: border-box;
+  padding:
+    calc(48 * var(--ui-px))
+    calc(40 * var(--ui-px))
+    calc(18 * var(--ui-px));
+}
+
+.home-face__launch {
+  flex: 0 0 auto;
+  width: 100%;
+  margin-top: calc(24 * var(--ui-px));
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+  text-align: center;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.home-face__hero {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.home-face__hero-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(52 * var(--ui-px));
+  height: calc(52 * var(--ui-px));
+}
+
+.home-face__hero-icon .home-face__icon {
+  width: 100%;
+  height: 100%;
+}
+
+.home-face__hero-icon--ai .home-face__icon,
+.home-face__hero-icon--plan .home-face__icon {
+  animation: pomo-tomato-bob 2.4s ease-in-out infinite;
+}
+
+.home-face__hero-icon--plan .home-face__icon {
+  animation-delay: 0.3s;
+}
+
+.home-face__hero-icon--tomato .pomo-tomato--lg {
+  width: 100%;
+  height: 100%;
+}
+
+.home-face__hero-icon--tomato .pomo-tomato__svg {
+  width: 100%;
+  height: 100%;
+}
+
+.home-face__state {
+  margin: calc(8 * var(--ui-px)) 0 0;
+  font-family: var(--font-title);
+  font-size: calc(14 * var(--ui-px));
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.6px;
+}
+
+.home-face__stars {
+  margin: calc(5 * var(--ui-px)) 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: calc(4 * var(--ui-px));
+  font-size: calc(15 * var(--ui-px));
+  font-weight: 800;
+  color: #ffd54f;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 calc(6 * var(--ui-px)) rgba(255, 193, 7, 0.45);
+}
+
+.home-face__star-icon {
+  width: calc(14 * var(--ui-px));
+  height: calc(14 * var(--ui-px));
+  color: #ffca28;
+  flex-shrink: 0;
+}
+
+.home-face__footer {
+  flex-shrink: 0;
+  width: 100%;
+  margin-top: auto;
+  padding-top: calc(12 * var(--ui-px));
+}
+
+.home-face__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(10 * var(--ui-px));
+}
+
+.home-face__modes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(12 * var(--ui-px));
+}
+
+.home-face__mode-dot {
+  width: calc(33 * var(--ui-px));
+  height: calc(33 * var(--ui-px));
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  opacity: 0.42;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-face__mode-dot .home-face__icon {
+  width: calc(18 * var(--ui-px));
+  height: calc(18 * var(--ui-px));
+}
+
+.home-face__mode-dot--on {
+  opacity: 1;
+  background: rgba(255, 193, 7, 0.18);
+  box-shadow: 0 0 calc(10 * var(--ui-px)) rgba(255, 180, 0, 0.42);
+}
+
+.home-face__side {
+  flex-shrink: 0;
+  width: calc(28 * var(--ui-px));
+  height: calc(28 * var(--ui-px));
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.11);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(228, 226, 220, 0.92);
+}
+
+.home-face__side-icon {
+  width: calc(14 * var(--ui-px));
+  height: calc(14 * var(--ui-px));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-face__hero-icon--ai .home-face__icon,
+  .home-face__hero-icon--plan .home-face__icon {
+    animation: none;
+  }
+}

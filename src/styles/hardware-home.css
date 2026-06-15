@@ -1,0 +1,44 @@
+/* 物理 Home 键 — 屏幕下方唯一黄色控件（×1.2，上移居中凹槽） */
+.hardware-home {
+  position: absolute;
+  left: var(--home-x);
+  top: var(--home-y);
+  width: var(--home-d);
+  aspect-ratio: 1;
+  height: auto;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  color: rgba(58, 32, 0, 0.88);
+  background: radial-gradient(circle at 38% 30%, #ffe082 0%, #ffc107 52%, #e89600 100%);
+  box-shadow:
+    0 calc(2 * var(--home-d) / 53) 0 rgba(110, 68, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 3px rgba(130, 78, 0, 0.18);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.hardware-home__icon {
+  width: 44%;
+  height: 44%;
+}
+
+.hardware-home--pressed {
+  transform: translateY(1px) scale(0.97);
+  box-shadow:
+    0 1px 0 rgba(110, 68, 0, 0.35),
+    inset 0 2px 4px rgba(130, 78, 0, 0.28);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hardware-home {
+    transition: none;
+  }
+}

@@ -1,0 +1,272 @@
+@import './variables.css';
+
+/* ========== 成长数据条（LCD 徽章风） ========== */
+.growth-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(230, 242, 252, 0.88) 100%);
+  border: 1px solid rgba(130, 170, 210, 0.45);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 3px rgba(60, 100, 140, 0.08);
+}
+
+.growth-strip--compact {
+  gap: 5px;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.growth-strip--asset {
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255, 252, 245, 0.96) 0%, rgba(255, 243, 224, 0.92) 100%);
+  border: 1.5px solid rgba(255, 193, 7, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 2px 8px rgba(255, 152, 0, 0.1);
+}
+
+.growth-strip--asset .growth-strip__item {
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 5px 4px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.58);
+  border: 1px solid rgba(255, 204, 128, 0.28);
+}
+
+.growth-strip--asset .growth-strip__icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.growth-strip--asset .growth-strip__icon--star {
+  font-size: 18px;
+  filter: drop-shadow(0 1px 3px rgba(255, 193, 7, 0.55));
+}
+
+.growth-strip--asset .growth-strip__value {
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.growth-strip--asset .growth-strip__label {
+  font-size: 9px;
+  color: #8d6e63;
+}
+
+.growth-strip--asset .growth-strip__item--points .growth-strip__value {
+  color: #ff8f00;
+  text-shadow: 0 1px 2px rgba(255, 193, 7, 0.35);
+}
+
+.growth-strip--asset .growth-strip__item--streak .growth-strip__value {
+  color: #ef6c00;
+}
+
+.growth-strip--asset .growth-strip__item--time .growth-strip__value {
+  color: #00897b;
+}
+
+.growth-strip--points-only {
+  gap: 3px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(130, 170, 210, 0.35);
+  box-shadow: none;
+}
+
+.growth-strip--points-only .growth-strip__icon {
+  font-size: 10px;
+}
+
+.growth-strip--points-only .growth-strip__value {
+  font-size: 12px;
+  color: #c89020;
+}
+
+.growth-strip__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  min-width: 0;
+}
+
+.growth-strip__icon {
+  font-size: 9px;
+  line-height: 1;
+}
+
+.growth-strip__value {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  color: #3a5878;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.growth-strip--compact .growth-strip__value {
+  font-size: 10px;
+}
+
+.growth-strip__label {
+  font-family: var(--font-title);
+  font-size: 8px;
+  color: #6890b0;
+  line-height: 1;
+}
+
+.growth-strip__dot {
+  font-size: 8px;
+  color: rgba(100, 140, 170, 0.45);
+  line-height: 1;
+}
+
+.growth-strip__item--points .growth-strip__value {
+  color: #c89020;
+}
+
+.growth-strip__item--streak .growth-strip__value {
+  color: #d87040;
+}
+
+.growth-strip__item--time .growth-strip__value {
+  color: #4088b8;
+}
+
+/* ========== AI 鼓励语 ========== */
+.ai-encourage {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, rgba(210, 235, 255, 0.85) 0%, rgba(230, 245, 255, 0.65) 100%);
+  border: 1px solid rgba(120, 180, 230, 0.4);
+}
+
+.ai-encourage--compact {
+  margin-top: 3px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  gap: 4px;
+}
+
+.ai-encourage__avatar {
+  flex-shrink: 0;
+}
+
+.ai-encourage__avatar .tutor-teacher__svg {
+  width: 28px;
+  height: 28px;
+}
+
+.ai-encourage__emoji {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.ai-encourage__text {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-title);
+  font-size: 9px;
+  font-weight: var(--font-weight-bold);
+  color: #3a6088;
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ai-encourage--compact .ai-encourage__text {
+  font-size: 8px;
+}
+
+/* ========== 模块顶栏 ========== */
+.device-growth-header {
+  flex-shrink: 0;
+  padding: 0 8px 3px;
+}
+
+.device-growth-header--asset {
+  padding: 0 10px 6px;
+}
+
+.home-dash {
+  flex-shrink: 0;
+  padding: 4px 8px 0;
+}
+
+.home-dash__brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 3px;
+  padding: 0 2px;
+}
+
+.home-dash__title {
+  font-family: var(--font-title);
+  font-size: 10px;
+  font-weight: var(--font-weight-bold);
+  color: #5080a0;
+  letter-spacing: 0.5px;
+}
+
+.home-dash__led {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-family: var(--font-title);
+  font-size: 7px;
+  color: #78a0b8;
+}
+
+.home-dash__led-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #7ee8a2;
+  box-shadow: 0 0 5px rgba(100, 220, 140, 0.55);
+  animation: home-led-pulse 2s ease-in-out infinite;
+}
+
+@keyframes home-led-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pomo-reminder__growth {
+  margin-top: 2px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-family: var(--font-title);
+  font-size: 8px;
+  color: #5088a8;
+  background: rgba(200, 230, 255, 0.65);
+  border: 1px solid rgba(140, 190, 230, 0.45);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-dash__led-dot {
+    animation: none;
+  }
+}

@@ -1,0 +1,218 @@
+@import './variables.css';
+
+/* ========== 首页 - 硬件 launcher 风格 ========== */
+.home {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(165deg, #dce8f2 0%, #e8f0f6 50%, #dde6ee 100%);
+  background-size: 8px 8px, 8px 8px, 100% 100%;
+}
+
+/* 两个大卡片横向排列 */
+.home-keys {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 6px;
+  width: 100%;
+  padding: 4px 8px 8px;
+  box-sizing: border-box;
+}
+
+.home-keys .hw-key:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.home-keys .hw-key:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+/* ========== 硬件按键 ========== */
+.hw-key {
+  position: relative;
+  flex: 1 1 42%;
+  min-width: 40%;
+  max-width: calc(50% - 4px);
+  height: 100%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  animation: hw-key-enter 0.35s ease backwards;
+}
+
+.hw-key__bezel {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 3px;
+  border-radius: 10px;
+  background: linear-gradient(145deg, #b8c8d4 0%, #8fa3b0 100%);
+  box-shadow:
+    0 3px 0 #7a8f9c,
+    0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.hw-key__surface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.hw-key__icon {
+  font-size: 28px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.1));
+  animation: hw-icon-float 2.8s ease-in-out infinite;
+}
+
+.hw-key__label {
+  font-family: var(--font-title);
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.25;
+  padding: 0 4px;
+  max-width: 100%;
+  word-break: keep-all;
+}
+
+.hw-key__shine {
+  position: absolute;
+  top: 6px;
+  left: 8px;
+  right: 8px;
+  height: 30%;
+  border-radius: 6px 6px 50% 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, transparent 100%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+/* 番茄闹钟 - 暖色面板 */
+.hw-key--tomato .hw-key__surface {
+  background: linear-gradient(168deg, #ffe8dc 0%, #ffd4c4 45%, #ffc4b0 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -3px 6px rgba(200, 100, 60, 0.15);
+}
+
+.hw-key--tomato .hw-key__bezel {
+  background: linear-gradient(145deg, #d4a090 0%, #b87860 100%);
+  box-shadow:
+    0 3px 0 #9a6048,
+    0 4px 8px rgba(120, 60, 30, 0.2);
+}
+
+/* AI课文辅导 - 冷色面板 */
+.hw-key--tutor .hw-key__surface {
+  background: linear-gradient(168deg, #dceeff 0%, #c8e4fc 45%, #b8d8f8 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -3px 6px rgba(60, 120, 180, 0.12);
+}
+
+.hw-key--tutor .hw-key__bezel {
+  background: linear-gradient(145deg, #90b0c8 0%, #6890b0 100%);
+  box-shadow:
+    0 3px 0 #507898,
+    0 4px 8px rgba(40, 80, 120, 0.2);
+}
+
+/* 按下状态 - 模拟物理键程 */
+.hw-key--pressed .hw-key__bezel,
+.hw-key:active .hw-key__bezel {
+  transform: translateY(3px);
+  box-shadow:
+    0 0 0 #7a8f9c,
+    0 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.hw-key--tomato.hw-key--pressed .hw-key__bezel,
+.hw-key--tomato:active .hw-key__bezel {
+  box-shadow:
+    0 0 0 #9a6048,
+    0 1px 3px rgba(120, 60, 30, 0.15);
+}
+
+.hw-key--tutor.hw-key--pressed .hw-key__bezel,
+.hw-key--tutor:active .hw-key__bezel {
+  box-shadow:
+    0 0 0 #507898,
+    0 1px 3px rgba(40, 80, 120, 0.15);
+}
+
+.hw-key--pressed .hw-key__surface,
+.hw-key:active .hw-key__surface {
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(0, 0, 0, 0.05);
+}
+
+.hw-key--pressed .hw-key__icon,
+.hw-key:active .hw-key__icon {
+  transform: scale(0.92);
+  animation: none;
+}
+
+.hw-key--pressed .hw-key__shine,
+.hw-key:active .hw-key__shine {
+  opacity: 0.2;
+}
+
+/* ========== 动画 ========== */
+@keyframes hw-key-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes hw-icon-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+.hw-key:nth-child(2) .hw-key__icon {
+  animation-delay: 0.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hw-key,
+  .hw-key__icon {
+    animation: none;
+  }
+
+  .hw-key--pressed .hw-key__bezel,
+  .hw-key:active .hw-key__bezel {
+    transform: translateY(2px);
+  }
+}

@@ -1,0 +1,60 @@
+:root {
+  /* 屏幕逻辑尺寸 */
+  --screen-width: 320px;
+  --screen-height: 240px;
+
+  /* 主色 - 儿童机器人暖色调 */
+  --color-primary: #5eb8ff;
+  --color-primary-dark: #3da5f5;
+  --color-secondary: #7ee8a2;
+  --color-accent: #ffb347;
+  --color-warm: #ff9a76;
+  --color-danger: #ff7b7b;
+
+  /* 背景与表面 */
+  --color-bg: #eef6fc;
+  --color-bg-warm: #fff8f0;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5f9ff;
+
+  /* 文字 */
+  --color-text: #3d4f5f;
+  --color-text-secondary: #7a8fa0;
+  --color-text-inverse: #ffffff;
+
+  /* 边框与阴影 - 柔和 */
+  --color-border: #d4e4f0;
+  --radius-sm: 4px;
+  --radius-md: 7px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 1px 4px rgba(94, 184, 255, 0.12);
+  --shadow-card: 0 2px 5px rgba(61, 79, 95, 0.06);
+
+  /* 间距（整体缩小 30%） */
+  --space-xs: 3px;
+  --space-sm: 4px;
+  --space-md: 6px;
+  --space-lg: 8px;
+  --space-xl: 11px;
+
+  /* 字体 - 儿童友好 */
+  --font-title: 'ZCOOL KuaiLe', 'Yuanti SC', 'STYuanti', 'PingFang SC', cursive;
+  --font-body: 'Nunito', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-size-xs: 7px;
+  --font-size-sm: 8px;
+  --font-size-md: 9px;
+  --font-size-lg: 11px;
+  --font-size-xl: 13px;
+  --font-size-display: 15px;
+  --font-weight-normal: 600;
+  --font-weight-bold: 700;
+
+  /* 触控目标（缩小 30%） */
+  --btn-height: 25px;
+  --btn-height-lg: 31px;
+  --icon-size: 20px;
+  --status-height: 15px;
+  --topbar-height: 22px;
+  --footer-height: 22px;
+}

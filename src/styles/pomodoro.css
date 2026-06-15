@@ -1,0 +1,882 @@
+@import './variables.css';
+
+/* ========== 页面容器 ========== */
+.pomodoro-page {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: linear-gradient(180deg, #fff8f2 0%, #ffefe6 55%, #ffe8dc 100%);
+}
+
+/* ========== 硬件按钮 ========== */
+.pomo-hw-btn {
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: 1px solid #e8c8b8;
+  background: linear-gradient(180deg, #fff 0%, #f5ebe6 100%);
+  box-shadow: 0 2px 0 #d8b0a0;
+  font-family: var(--font-title);
+  font-size: 10px;
+  color: #5a4038;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.pomo-hw-btn:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+.pomo-hw-btn--primary {
+  color: #fff;
+  background: linear-gradient(180deg, #ffb090 0%, #ff8868 100%);
+  border-color: #e87050;
+  box-shadow: 0 2px 0 #c86040;
+}
+
+.pomo-hw-btn--primary:active {
+  box-shadow: none;
+}
+
+.pomo-hw-btn--ghost {
+  background: #fff8f4;
+}
+
+.pomo-hw-btn--mini {
+  height: 20px;
+  padding: 0 8px;
+  font-size: 9px;
+}
+
+/* ========== 小番茄角色（SVG 矢量） ========== */
+.pomo-tomato {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.pomo-tomato__svg {
+  display: block;
+  overflow: visible;
+  user-select: none;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 2px rgba(200, 80, 40, 0.12));
+}
+
+.pomo-tomato--xs .pomo-tomato__svg {
+  width: 24px;
+  height: 24px;
+}
+
+.pomo-tomato--sm .pomo-tomato__svg {
+  width: 36px;
+  height: 36px;
+}
+
+.pomo-tomato--md .pomo-tomato__svg {
+  width: 44px;
+  height: 44px;
+}
+
+.pomo-tomato--lg .pomo-tomato__svg {
+  width: 68px;
+  height: 68px;
+  filter: drop-shadow(0 2px 6px rgba(200, 80, 40, 0.18));
+}
+
+.pomo-tomato--active .pomo-tomato__svg {
+  animation: pomo-tomato-bob 2.4s ease-in-out infinite;
+}
+
+.pomo-tomato--cheer .pomo-tomato__svg {
+  animation: pomo-tomato-bob 1.6s ease-in-out infinite;
+}
+
+@keyframes pomo-tomato-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* ========== 页面1：模式选择 ========== */
+.pomo-select {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 4px 8px 8px;
+  overflow: hidden;
+}
+
+.pomo-select__hero {
+  text-align: center;
+  flex-shrink: 0;
+  margin-bottom: 6px;
+}
+
+.pomo-select__subtitle {
+  font-family: var(--font-title);
+  font-size: 11px;
+  color: #a07060;
+  margin-top: 4px;
+}
+
+.pomo-select__grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  min-height: 0;
+}
+
+.pomo-select__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+  transition: transform 0.1s;
+}
+
+.pomo-select__item:active {
+  transform: scale(0.97) translateY(1px);
+}
+
+.pomo-select__item--study {
+  background: linear-gradient(168deg, #dff0ff, #c8e4fc);
+  border: 1px solid #a8d0f0;
+}
+
+.pomo-select__item--water {
+  background: linear-gradient(168deg, #dff8ff, #c8eefc);
+  border: 1px solid #a8e0f0;
+}
+
+.pomo-select__item--read {
+  background: linear-gradient(168deg, #dffaea, #c8f0d8);
+  border: 1px solid #a8e0c0;
+}
+
+.pomo-select__item--custom {
+  background: linear-gradient(168deg, #fff0d8, #ffe8c0);
+  border: 1px solid #f0d090;
+}
+
+.pomo-select__icon {
+  font-size: 20px;
+}
+
+.pomo-select__label {
+  font-family: var(--font-title);
+  font-size: 11px;
+  color: #504038;
+}
+
+/* ========== 页面2：模式设置 ========== */
+.pomo-setup {
+  flex: 1;
+  min-height: 0;
+  padding: 4px 10px 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.pomo-setup__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.pomo-setup__icon {
+  font-size: 16px;
+}
+
+.pomo-setup__title {
+  font-family: var(--font-title);
+  font-size: 12px;
+  color: #c05840;
+}
+
+.pomo-setup__label {
+  font-family: var(--font-title);
+  font-size: 9px;
+  color: #806050;
+  margin-bottom: 4px;
+}
+
+.pomo-setup__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.pomo-setup__chip {
+  min-width: 36px;
+  height: 22px;
+  padding: 0 6px;
+  border-radius: 5px;
+  border: 1px solid #e8c8b8;
+  background: #fff;
+  font-family: var(--font-title);
+  font-size: 9px;
+  color: #604838;
+  cursor: pointer;
+}
+
+.pomo-setup__chip--on {
+  background: linear-gradient(180deg, #ffb090, #ff8868);
+  color: #fff;
+  border-color: #e87050;
+}
+
+.pomo-setup__field {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.pomo-setup__input {
+  flex: 1;
+  height: 22px;
+  border: 1px solid #e8c8b8;
+  border-radius: 4px;
+  padding: 0 6px;
+  font-size: 10px;
+  background: #fff;
+  color: #403028;
+}
+
+.pomo-setup__input--short {
+  flex: 0 0 48px;
+  text-align: center;
+}
+
+.pomo-setup__unit {
+  font-size: 8px;
+  color: #907060;
+}
+
+.pomo-setup__preview {
+  font-family: var(--font-title);
+  font-size: 9px;
+  color: #c07050;
+  background: rgba(255, 240, 230, 0.8);
+  padding: 4px 6px;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.pomo-setup__toggle {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  font-family: var(--font-title);
+  font-size: 9px;
+  color: #604838;
+  margin-bottom: 8px;
+}
+
+.pomo-setup__toggle--compact {
+  margin-bottom: 4px;
+}
+
+.pomo-setup__select {
+  height: 20px;
+  border: 1px solid #e8c8b8;
+  border-radius: 4px;
+  font-size: 8px;
+  background: #fff;
+}
+
+.pomo-setup__actions {
+  margin-top: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.pomo-setup__actions .pomo-hw-btn {
+  flex: 1;
+}
+
+/* ========== 页面3：计时中（儿童陪伴 · 可视化） ========== */
+.pomo-running {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 8px 4px;
+  overflow: hidden;
+}
+
+.pomo-running__head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 0 2px;
+}
+
+.pomo-running__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.55);
+  min-width: 0;
+}
+
+.pomo-running__badge--mode {
+  border-color: color-mix(in srgb, var(--mode-color, #ff8868) 35%, transparent);
+  background: color-mix(in srgb, var(--mode-color, #ff8868) 12%, #fff);
+}
+
+.pomo-running__badge--task {
+  border-color: rgba(255, 160, 100, 0.45);
+  background: rgba(255, 240, 220, 0.75);
+  max-width: 58%;
+}
+
+.pomo-running__badge--task .pomo-running__badge-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 72px;
+}
+
+.pomo-running__badge--focus {
+  background: rgba(255, 240, 220, 0.75);
+  border-color: rgba(255, 160, 100, 0.45);
+}
+
+.pomo-running__badge--pause {
+  background: rgba(235, 242, 248, 0.85);
+  border-color: rgba(140, 170, 190, 0.45);
+}
+
+.pomo-running__badge--rest {
+  background: rgba(230, 240, 255, 0.8);
+  border-color: rgba(140, 170, 220, 0.4);
+}
+
+.pomo-running__badge-icon {
+  font-size: 11px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.pomo-running__badge-icon--pulse {
+  animation: pomo-focus-pulse 2s ease-in-out infinite;
+}
+
+.pomo-running__badge-text {
+  font-family: var(--font-title);
+  font-size: 9px;
+  font-weight: var(--font-weight-bold);
+  color: #705040;
+  line-height: 1;
+}
+
+@keyframes pomo-focus-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(0.88);
+  }
+}
+
+.pomo-running__stage {
+  flex: 1 1 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.pomo-running__dial {
+  position: relative;
+  width: 108px;
+  height: 108px;
+  flex-shrink: 0;
+}
+
+.pomo-running__dial--live .pomo-ring__fill {
+  filter: drop-shadow(0 0 3px rgba(255, 100, 70, 0.45));
+}
+
+.pomo-running__dial-core {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  pointer-events: none;
+}
+
+.pomo-running__dial-core .pomo-tomato {
+  margin-top: -6px;
+}
+
+.pomo-running__time {
+  margin-top: -2px;
+  font-family: var(--font-body);
+  font-size: 17px;
+  font-weight: 700;
+  color: #c84028;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
+  line-height: 1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.pomo-ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.pomo-ring--running {
+  animation: pomo-ring-breathe 3s ease-in-out infinite;
+}
+
+.pomo-ring__track {
+  stroke: #ffe8de;
+  stroke-width: 6;
+}
+
+.pomo-ring__fill {
+  stroke: #ff6b4a;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.pomo-ring__dot {
+  fill: #ff6b4a;
+  stroke: #fff;
+  stroke-width: 1.5;
+  transform-origin: center;
+}
+
+.pomo-ring__dot--live {
+  animation: pomo-ring-dot-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pomo-ring-breathe {
+  0%,
+  100% {
+    opacity: 1;
+    transform: rotate(-90deg) scale(1);
+  }
+  50% {
+    opacity: 0.92;
+    transform: rotate(-90deg) scale(1.02);
+  }
+}
+
+@keyframes pomo-ring-dot-pulse {
+  0%,
+  100% {
+    r: 3.2;
+    opacity: 1;
+  }
+  50% {
+    r: 4;
+    opacity: 0.85;
+  }
+}
+
+.pomo-running__bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 2px 0 0;
+  min-height: 30px;
+}
+
+.pomo-running__next {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 54px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(200, 235, 255, 0.7);
+  border: 1px solid rgba(140, 200, 230, 0.55);
+}
+
+.pomo-running__next--empty {
+  visibility: hidden;
+  background: transparent;
+  border-color: transparent;
+}
+
+.pomo-running__next-icon {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.pomo-running__next-time {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  color: #3a7898;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+.pomo-running__growth-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.pomo-running__growth-wrap .growth-strip {
+  width: 100%;
+  max-width: 118px;
+}
+
+.pomo-hw-pause--round {
+  width: 28px;
+  height: 28px;
+  max-width: none;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pomo-hw-pause--round .pomo-hw-pause__bezel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #c8d6e0 0%, #9fb0bc 100%);
+  box-shadow: 0 2px 0 #7a8f9c, 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.pomo-hw-pause--round .pomo-hw-pause__icon {
+  display: block;
+  width: calc(100% - 6px);
+  height: calc(100% - 6px);
+  line-height: 20px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #fff 0%, #eef4f8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-size: 10px;
+  color: #506878;
+  text-align: center;
+}
+
+.pomo-hw-pause--round.pomo-hw-pause--pressed .pomo-hw-pause__bezel,
+.pomo-hw-pause--round:active .pomo-hw-pause__bezel {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #7a8f9c, 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.pomo-hw-pause {
+  width: 100%;
+  max-width: 120px;
+  height: 26px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pomo-hw-pause__bezel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 7px;
+  background: linear-gradient(145deg, #c8d6e0 0%, #9fb0bc 100%);
+  box-shadow: 0 2px 0 #7a8f9c, 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.pomo-hw-pause__label {
+  display: block;
+  width: calc(100% - 5px);
+  height: calc(100% - 5px);
+  line-height: 19px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #fff 0%, #eef4f8 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  font-family: var(--font-title);
+  font-size: 10px;
+  color: #506878;
+  text-align: center;
+}
+
+.pomo-hw-pause--pressed .pomo-hw-pause__bezel,
+.pomo-hw-pause:active .pomo-hw-pause__bezel {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #7a8f9c, 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+@keyframes pomo-text-glow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* ========== 小表盘 ========== */
+.pomo-clock {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.pomo-clock__face {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #fff;
+  border: 1.5px solid #f0c0b0;
+  position: relative;
+}
+
+.pomo-clock__hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: bottom center;
+  border-radius: 1px;
+}
+
+.pomo-clock__hand--minute {
+  width: 1.5px;
+  height: 6px;
+  margin-left: -0.75px;
+  background: #d08060;
+}
+
+.pomo-clock__hand--second {
+  width: 1px;
+  height: 8px;
+  margin-left: -0.5px;
+  background: #ff5544;
+}
+
+.pomo-clock__center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  margin: -1.5px 0 0 -1.5px;
+  border-radius: 50%;
+  background: #ff5544;
+}
+
+.pomo-clock__orbit {
+  position: absolute;
+  inset: 0;
+  transform-origin: center;
+}
+
+.pomo-clock__dot {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 50%;
+  background: #ff3322;
+  box-shadow: 0 0 3px rgba(255, 50, 30, 0.6);
+}
+
+.pomo-clock--tick .pomo-clock__dot {
+  animation: pomo-dot-bounce 1s ease-in-out infinite;
+}
+
+/* ========== 页面4：提醒 ========== */
+.pomo-reminder {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.pomo-reminder__particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pomo-reminder__particles span {
+  position: absolute;
+  font-size: 12px;
+  animation: pomo-particle 1.5s ease-in-out infinite;
+}
+
+.pomo-reminder__particles span:nth-child(1) {
+  top: 15%;
+  left: 12%;
+}
+
+.pomo-reminder__particles span:nth-child(2) {
+  top: 20%;
+  right: 15%;
+  animation-delay: 0.3s;
+}
+
+.pomo-reminder__particles span:nth-child(3) {
+  bottom: 30%;
+  left: 20%;
+  animation-delay: 0.6s;
+}
+
+.pomo-reminder__title {
+  font-family: var(--font-title);
+  font-size: 16px;
+  color: #d05030;
+  margin-top: 4px;
+  animation: pomo-card-pop 0.4s ease;
+}
+
+.pomo-reminder__main {
+  font-family: var(--font-title);
+  font-size: 11px;
+  color: #604838;
+  margin-top: 4px;
+}
+
+.pomo-reminder__sub {
+  font-size: 9px;
+  color: #907060;
+  margin-top: 2px;
+}
+
+.pomo-reminder__tips {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.pomo-reminder__tips span {
+  font-family: var(--font-title);
+  font-size: 8px;
+  color: #fff;
+  background: #ffb090;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.pomo-reminder__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+  max-width: 140px;
+  margin-top: 10px;
+}
+
+.pomo-reminder__auto {
+  font-size: 7px;
+  color: #a08070;
+  margin-top: 4px;
+}
+
+/* ========== 动画 ========== */
+@keyframes pomo-dot-bounce {
+  0%,
+  100% {
+    scale: 1;
+  }
+  50% {
+    scale: 1.3;
+  }
+}
+
+@keyframes pomo-particle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes pomo-card-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pomo-ring--running,
+  .pomo-ring__dot--live,
+  .pomo-running__badge-icon--pulse,
+  .pomo-tomato--active,
+  .pomo-tomato--cheer,
+  .pomo-clock--tick .pomo-clock__dot,
+  .pomo-running__encourage,
+  .pomo-reminder__particles span {
+    animation: none;
+  }
+}
