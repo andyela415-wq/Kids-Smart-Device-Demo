@@ -1,0 +1,181 @@
+@import './variables.css';
+
+/* ============================================================
+   番茄任务结算页 — 高成就感庆祝 UI（320×240）
+   ============================================================ */
+
+.pomo-ref--done .pomo-ref__main--done {
+  flex: 1 1 0;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px 10px;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.pomo-ref__done-celebrate {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.pomo-ref__pill--done {
+  border: none;
+  background: var(--color-card-mint);
+  color: #3d8b52;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  min-height: 24px;
+  padding: 0 12px;
+  border-radius: var(--radius-pill);
+}
+
+.pomo-ref__done-title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 26px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1.15;
+  color: var(--color-accent-orange);
+  text-shadow: 0 2px 0 rgba(255, 130, 58, 0.12);
+}
+
+.pomo-ref__done-meta {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 4px 6px;
+  max-width: 280px;
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  line-height: 1.4;
+  color: var(--color-text);
+}
+
+.pomo-ref__done-meta-task {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pomo-ref__done-meta-sep {
+  color: var(--color-text-secondary);
+}
+
+.pomo-ref__done-meta-pomo {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.pomo-ref__done-tomato-icon {
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 1px 2px rgba(255, 99, 71, 0.25));
+}
+
+/* ---------- 返回首页按钮（实体按压感） ---------- */
+.pomo-ref__done-home-btn {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 268px;
+  min-height: 40px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-accent-orange);
+  box-shadow:
+    var(--shadow-press),
+    0 6px 16px rgba(255, 130, 58, 0.22);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    transform 0.14s ease,
+    box-shadow 0.14s ease,
+    background 0.14s ease;
+}
+
+.pomo-ref__done-home-btn:active {
+  transform: scale(0.96);
+  background: var(--color-accent-orange-deep);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(255, 130, 58, 0.18);
+}
+
+/* ---------- 庆祝彩纸（置于内容层之上） ---------- */
+.pomo-ref--done > .pomo-confetti {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.pomo-confetti__piece {
+  position: absolute;
+  top: 8px;
+  animation: pomo-confetti-fall 2.4s ease-in forwards;
+  will-change: transform, opacity;
+}
+
+.pomo-confetti__piece--paper {
+  width: 9px;
+  height: 13px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+}
+
+.pomo-confetti__piece--star,
+.pomo-confetti__piece--tomato {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+}
+
+@keyframes pomo-confetti-fall {
+  0% {
+    transform: translate3d(0, -16px, 0) rotate(var(--piece-rotate, 0deg));
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(0, 190px, 0) rotate(calc(var(--piece-rotate, 0deg) + 320deg));
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pomo-confetti__piece {
+    animation-duration: 1.6s;
+  }
+
+  .pomo-ref__done-home-btn {
+    transition: none;
+  }
+}

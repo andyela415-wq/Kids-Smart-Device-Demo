@@ -1,0 +1,311 @@
+/* ============================================================
+   番茄闹钟 · 选择学习任务（320×240 奶油风 可滚动 2×N 网格）
+   ============================================================ */
+
+.pomo-pick {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #fdfbf7;
+  box-sizing: border-box;
+}
+
+/* ---------- 合并顶栏：返回 + 标题同一行 ---------- */
+.pomo-pick__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  margin-top: 6px;
+  padding: 0 10px;
+}
+
+.pomo-pick__back {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 6px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.04);
+  color: #2d3748;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pomo-pick__title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1;
+}
+
+/* ---------- 主内容 ---------- */
+.pomo-pick__main {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 6px;
+  overflow: hidden;
+}
+
+.pomo-pick__subtitle {
+  flex-shrink: 0;
+  margin: 4px 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ---------- 可滚动网格容器 ---------- */
+.pomo-pick__grid-container,
+.grid-container {
+  flex-shrink: 0;
+  height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.pomo-pick__grid-container::-webkit-scrollbar,
+.grid-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* ---------- 2×N 网格 ---------- */
+.pomo-pick__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 64px;
+  gap: 6px;
+  padding-bottom: 2px;
+}
+
+.pomo-pick__card {
+  position: relative;
+  height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 8px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 2px 8px rgba(92, 100, 112, 0.06);
+}
+
+.pomo-pick__card:active {
+  transform: scale(0.97);
+}
+
+.pomo-pick__card--blue {
+  background: #eff6ff;
+}
+
+.pomo-pick__card--green {
+  background: #f0fdf4;
+}
+
+.pomo-pick__card--yellow {
+  background: #fffbeb;
+}
+
+.pomo-pick__card--pink {
+  background: #fdf2f8;
+}
+
+.pomo-pick__card--purple {
+  background: #f3e8ff;
+}
+
+.pomo-pick__card--cyan {
+  background: #e0f2fe;
+}
+
+.pomo-pick__card--add {
+  background: #f3f4f6;
+  border: 2px dashed #cbd5e1;
+  box-shadow: none;
+}
+
+.pomo-pick__icon {
+  flex-shrink: 0;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.pomo-pick__name {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d3748;
+  line-height: 1.15;
+  max-width: calc(100% - 8px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pomo-pick__badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 1px 5px;
+  border-radius: 999px;
+  font-size: 9px;
+  font-weight: 700;
+  color: #ff823a;
+  background: rgba(255, 130, 58, 0.14);
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+/* ---------- 自定义任务弹窗 ---------- */
+.pomo-pick__modal {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.pomo-pick__modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: rgba(45, 55, 72, 0.35);
+  cursor: pointer;
+}
+
+.pomo-pick__modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 268px);
+  padding: 12px 12px 10px;
+  border-radius: 16px;
+  background: #fdfbf7;
+  box-shadow: 0 8px 24px rgba(92, 100, 112, 0.18);
+  box-sizing: border-box;
+}
+
+.pomo-pick__modal-title {
+  margin: 0 0 4px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 700;
+  color: #2d3748;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.pomo-pick__modal-hint {
+  margin: 0 0 8px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: #718096;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.pomo-pick__modal-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.pomo-pick__modal-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 36px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px rgba(203, 213, 225, 0.9);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d3748;
+  outline: none;
+}
+
+.pomo-pick__modal-input:focus {
+  box-shadow: inset 0 0 0 2px rgba(255, 130, 58, 0.55);
+}
+
+.pomo-pick__modal-voice {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 12px;
+  background: #fffbeb;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pomo-pick__modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.pomo-pick__modal-btn {
+  flex: 1 1 0;
+  height: 34px;
+  border: none;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d3748;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pomo-pick__modal-btn--primary {
+  background: #ff823a;
+  color: #fff;
+}
+
+.pomo-pick__modal-btn--primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pomo-pick__modal-btn:active:not(:disabled) {
+  transform: scale(0.98);
+}

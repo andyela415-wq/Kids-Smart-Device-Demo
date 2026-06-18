@@ -1,7 +1,6 @@
 import { getTodayDayIndex } from './learningPlanStorage'
 import { getWeekDayTasks } from './weeklyPlan'
 import { findUpcomingStandbyReminder } from './scheduleAlarm'
-import { formatTime as formatDuration } from './timeFormat'
 
 const FOCUS_STATE_KEY = 'device_focus_state'
 
@@ -25,19 +24,13 @@ export function getDeviceStatus(now = new Date()) {
   const focus = readFocusState()
 
   if (focus?.running) {
-    if (focus.enableWater && focus.waterRemaining > 0) {
-      return {
-        upcomingReminder: {
-          icon: '💧',
-          text: formatDuration(focus.waterRemaining),
-        },
-      }
-    }
+    const phaseLabel =
+      focus.phase === 'break' ? '休息中' : focus.paused ? '已暂停' : '专注中'
 
     return {
       upcomingReminder: {
-        icon: '🍅',
-        text: focus.paused ? '已暂停' : '专注中',
+        icon: focus.phase === 'break' ? '🌿' : '🍅',
+        text: phaseLabel,
       },
     }
   }

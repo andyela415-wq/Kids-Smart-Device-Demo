@@ -1,11 +1,7 @@
 @import './variables.css';
 
 /* ============================================================
-   三层结构
-   device-shell   — Layer 1：完整外壳参考图
-   device-screen  — Layer 2：LCD 黑色容器（overflow 裁切）
-   device-screen__content + screen-status — Layer 3：屏内 UI
-   hardware-home  — 物理 Home 键（独立于屏幕容器）
+   320 × 240 硬件模拟器 — 严格锁死，超出隐藏
    ============================================================ */
 
 .device-preview {
@@ -15,129 +11,92 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   background:
-    radial-gradient(ellipse 80% 60% at 50% 42%, rgba(38, 34, 28, 0.55) 0%, transparent 70%),
-    #080808;
+    radial-gradient(ellipse 70% 55% at 50% 42%, rgba(255, 251, 247, 0.04) 0%, transparent 70%),
+    #1a1a1c;
 }
 
 .device-preview__label {
-  color: rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.35);
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: var(--font-weight-body);
 }
 
-.device-viewport {
+.device-screen {
   position: relative;
   flex-shrink: 0;
-  width: min(1024px, calc(100vw - 48px), calc((100vh - 60px) * 1024 / 985));
-  aspect-ratio: 1024 / 985;
-  height: auto;
-  overflow: hidden;
-}
-
-/* ---------- Layer 1：外壳底图 ---------- */
-.device-shell {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none !important;
-  user-select: none;
-  background-image: var(--shell-bg);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.45));
-}
-
-/* ---------- Layer 2：屏幕容器 ---------- */
-.device-screen {
-  position: absolute;
-  left: var(--screen-x);
-  top: var(--screen-y);
-  width: var(--screen-w);
-  height: var(--screen-h);
-  z-index: 2;
+  width: var(--screen-width);
+  height: var(--screen-height);
+  max-width: var(--screen-width);
+  max-height: var(--screen-height);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  pointer-events: auto;
-  touch-action: manipulation;
-  background: #000;
-  border-radius: var(--screen-rx) / var(--screen-ry);
-  container-type: size;
-  container-name: device-screen;
-
-  --ui-px: calc(100cqw / var(--ui-logical-w));
-  --screen-width: 100cqw;
-  --screen-height: 100cqh;
-  --space-xs: calc(3 * var(--ui-px));
-  --space-sm: calc(4 * var(--ui-px));
-  --space-md: calc(6 * var(--ui-px));
-  --space-lg: calc(8 * var(--ui-px));
-  --space-xl: calc(11 * var(--ui-px));
-  --font-size-xs: calc(7 * var(--ui-px));
-  --font-size-sm: calc(8 * var(--ui-px));
-  --font-size-md: calc(9 * var(--ui-px));
-  --font-size-lg: calc(11 * var(--ui-px));
-  --font-size-xl: calc(13 * var(--ui-px));
-  --font-size-display: calc(15 * var(--ui-px));
-  --btn-height: calc(25 * var(--ui-px));
-  --btn-height-lg: calc(31 * var(--ui-px));
-  --icon-size: calc(20 * var(--ui-px));
-  --status-height: calc(15 * var(--ui-px));
-  --topbar-height: calc(22 * var(--ui-px));
-  --footer-height: calc(22 * var(--ui-px));
-  --radius-sm: calc(4 * var(--ui-px));
-  --radius-md: calc(7 * var(--ui-px));
-  --radius-lg: calc(10 * var(--ui-px));
-  --screen-status-h: calc(22 * var(--ui-px));
-  box-shadow: inset 0 calc(-5 * var(--ui-px)) calc(8 * var(--ui-px)) rgba(0, 0, 0, 0.28);
+  background: var(--color-cream);
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 16px 48px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
 
 .device-screen__content {
-  flex: 1;
-  min-height: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  box-sizing: border-box;
 }
 
-/* ========== 屏内状态栏 ========== */
-.screen-status {
+/* ========== 状态栏（浮层，不挤压页面） ========== */
+.screen-status,
+.status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--status-height);
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: var(--screen-status-h);
-  min-height: var(--screen-status-h);
-  padding: 0 calc(14 * var(--ui-px));
-  flex-shrink: 0;
-  background: #000;
-  overflow: visible;
+  padding: 0 0 0 var(--page-padding-lg);
+  background: var(--color-cream);
+  line-height: 1;
+  box-sizing: border-box;
 }
 
 .screen-status__time {
+  flex-shrink: 0;
+  padding-left: var(--page-padding-lg);
   font-family: var(--font-body);
-  font-size: calc(10.8 * var(--ui-px));
-  font-weight: 600;
-  color: rgba(185, 183, 177, 0.95);
+  font-size: var(--font-size-status);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-strong);
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
-.screen-status__indicators {
+.screen-status__indicators,
+.status-bar-right {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: calc(6 * var(--ui-px));
+  justify-content: flex-end;
+  gap: 6px;
   flex-shrink: 0;
-  overflow: visible;
+  height: 100%;
+  padding-right: 8px;
+  box-sizing: border-box;
 }
 
 .screen-status__wifi {
   display: block;
-  width: calc(16.8 * var(--ui-px));
-  height: calc(13.1 * var(--ui-px));
+  width: auto;
+  height: 12px;
   flex-shrink: 0;
-  overflow: visible;
-  color: rgba(215, 213, 207, 0.92);
+  color: var(--color-text);
 }
 
 .screen-status__wifi--off {
@@ -145,10 +104,11 @@
 }
 
 .screen-status__volume {
-  width: calc(16.8 * var(--ui-px));
-  height: calc(12 * var(--ui-px));
+  display: block;
+  width: auto;
+  height: 12px;
   flex-shrink: 0;
-  color: rgba(215, 213, 207, 0.92);
+  color: var(--color-text);
 }
 
 .screen-status__volume--muted {
@@ -159,29 +119,32 @@
   display: flex;
   align-items: center;
   flex-shrink: 0;
+  height: 12px;
 }
 
 .screen-status__battery-body {
-  width: calc(19.2 * var(--ui-px));
-  height: calc(9.6 * var(--ui-px));
-  border: 1px solid rgba(215, 213, 207, 0.55);
-  border-radius: calc(2.4 * var(--ui-px));
+  width: 18px;
+  height: 10px;
+  border: none;
+  border-radius: 3px;
   padding: 1px;
-  background: rgba(0, 0, 0, 0.35);
+  background: rgba(92, 100, 112, 0.12);
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .screen-status__battery-fill {
   height: 100%;
-  background: linear-gradient(180deg, #9ef0b0 0%, #5cd87a 100%);
-  border-radius: calc(1.2 * var(--ui-px));
+  border-radius: 2px;
+  background: var(--color-accent-yellow);
 }
 
 .screen-status__battery-cap {
-  width: calc(2.4 * var(--ui-px));
-  height: calc(4.8 * var(--ui-px));
-  background: rgba(215, 213, 207, 0.55);
-  border-radius: 0 calc(1.2 * var(--ui-px)) calc(1.2 * var(--ui-px)) 0;
+  width: 2px;
+  height: 5px;
+  flex-shrink: 0;
+  background: rgba(92, 100, 112, 0.25);
+  border-radius: 0 1px 1px 0;
   margin-left: 1px;
 }
 
@@ -189,25 +152,35 @@ html.device-standby .screen-status {
   display: none;
 }
 
-html.device-standby .screen-content {
+html.device-standby .device-screen {
   background: #000;
 }
 
-.screen-content {
+html.device-standby .screen-content,
+html.device-standby .page-container,
+html.device-standby .app-content {
+  padding-top: 0;
+}
+
+.screen-content,
+.page-container,
+.app-content {
   position: relative;
   width: 100%;
   height: 100%;
+  padding-top: var(--status-height);
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: #000;
+  background: var(--color-cream);
 }
 
 .screen-content__body {
   flex: 1;
   min-height: 0;
   overflow: hidden;
-  padding: var(--space-md);
+  padding: var(--page-padding);
 }
 
 .screen-content__body--no-padding {

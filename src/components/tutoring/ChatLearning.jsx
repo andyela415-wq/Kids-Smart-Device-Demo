@@ -45,18 +45,16 @@ function ListenWaveform() {
 
 function ThinkingBubble() {
   return (
-    <div className="tutor-chat__thinking" aria-live="polite">
-      <div className="tutor-chat__avatar-col">
-        <AiTeacherAvatar size="sm" active={false} />
-        <span className="tutor-chat__avatar-name">小老师</span>
-      </div>
-      <div className="tutor-chat__thinking-bubble">
-        <span className="tutor-chat__thinking-text">
-          AI小老师正在思考中... 💬
-          <span className="tutor-chat__thinking-cursor" aria-hidden="true">
-            |
+    <div className="tutor-chat__thinking tutor-chat__msg tutor-chat__msg--ai" aria-live="polite">
+      <div className="tutor-chat__msg-body">
+        <div className="tutor-chat__thinking-bubble tutor-chat__msg-bubble tutor-chat__msg-bubble--ai chat-bubble ai-bubble">
+          <span className="tutor-chat__thinking-text tutor-chat__msg-text">
+            AI小老师正在思考中... 💬
+            <span className="tutor-chat__thinking-cursor" aria-hidden="true">
+              |
+            </span>
           </span>
-        </span>
+        </div>
       </div>
     </div>
   )
@@ -68,33 +66,27 @@ function AiMessage({ message, typedLength, onReplay }) {
 
   return (
     <article className="tutor-chat__msg tutor-chat__msg--ai">
-      <div className="tutor-chat__msg-row">
-        <div className="tutor-chat__avatar-col">
-          <AiTeacherAvatar size="sm" active={!isTyping} />
-          <span className="tutor-chat__avatar-name">小老师</span>
+      <div className="tutor-chat__msg-body">
+        <div className="tutor-chat__msg-bubble tutor-chat__msg-bubble--ai chat-bubble ai-bubble">
+          <p className="tutor-chat__msg-text">
+            {renderHighlightedText(visibleText)}
+            {isTyping && (
+              <span className="tutor-chat__typing-cursor" aria-hidden="true">
+                |
+              </span>
+            )}
+          </p>
         </div>
-        <div className="tutor-chat__msg-body">
-          <div className="tutor-chat__msg-bubble tutor-chat__msg-bubble--ai">
-            <p className="tutor-chat__msg-text">
-              {renderHighlightedText(visibleText)}
-              {isTyping && (
-                <span className="tutor-chat__typing-cursor" aria-hidden="true">
-                  |
-                </span>
-              )}
-            </p>
-          </div>
-          {!isTyping && onReplay && (
-            <button
-              type="button"
-              className="tutor-chat__replay"
-              aria-label="再听一遍"
-              onClick={() => onReplay(message.text)}
-            >
-              🔊 再听一遍
-            </button>
-          )}
-        </div>
+        {!isTyping && onReplay && (
+          <button
+            type="button"
+            className="tutor-chat__replay"
+            aria-label="再听一遍"
+            onClick={() => onReplay(message.text)}
+          >
+            🔊 再听一遍
+          </button>
+        )}
       </div>
     </article>
   )
@@ -111,7 +103,7 @@ function ChildMessage({ message }) {
   )
 }
 
-export default function ChatLearning() {
+export default function ChatLearning({ onBack }) {
   const [messages, setMessages] = useState(INITIAL_CHAT)
   const [inputText, setInputText] = useState('')
   const [thinking, setThinking] = useState(false)
@@ -277,10 +269,17 @@ export default function ChatLearning() {
 
   return (
     <main className="tutor-chat">
-      <header className="tutor-chat__teacher">
-        <AiTeacherAvatar size="md" active={!isBusy} />
-        <div className="tutor-chat__teacher-info">
-          <div className="tutor-chat__teacher-title-row">
+      <header className="tutor-chat__top">
+        {onBack ? (
+          <button type="button" className="tutor-chat__back" aria-label="返回" onClick={onBack}>
+            ‹
+          </button>
+        ) : (
+          <span className="tutor-chat__back-spacer" aria-hidden="true" />
+        )}
+        <div className="tutor-chat__teacher header-container">
+          <AiTeacherAvatar size="xs" active={!isBusy} />
+          <div className="tutor-chat__teacher-row">
             <p className="tutor-chat__teacher-name">AI 小老师</p>
             <button
               type="button"
@@ -291,11 +290,11 @@ export default function ChatLearning() {
             >
               {isAudioEnabled ? '🔊' : '🔇'}
             </button>
+            <p className="tutor-chat__teacher-status">
+              <span className="tutor-chat__status-dot" aria-hidden="true" />
+              {statusText}
+            </p>
           </div>
-          <p className="tutor-chat__teacher-status">
-            <span className="tutor-chat__status-dot" aria-hidden="true" />
-            {statusText}
-          </p>
         </div>
       </header>
 
@@ -321,17 +320,15 @@ export default function ChatLearning() {
       </div>
 
       <footer className="tutor-chat__composer">
-        <div className="tutor-chat__prompts-scroll" aria-label="快捷问题">
-          <div className="tutor-chat__prompts-track">
-            {QUICK_PROMPTS.map((item) => (
-              <QuickPrompt
-                key={item.id}
-                label={item.label}
-                disabled={isBusy}
-                onClick={() => submitUserText(item.text)}
-              />
-            ))}
-          </div>
+        <div className="tutor-chat__suggestions suggestions" aria-label="快捷问题">
+          {QUICK_PROMPTS.map((item) => (
+            <QuickPrompt
+              key={item.id}
+              label={item.label}
+              disabled={isBusy}
+              onClick={() => submitUserText(item.text)}
+            />
+          ))}
         </div>
 
         {listening && (
@@ -341,7 +338,7 @@ export default function ChatLearning() {
           </div>
         )}
 
-        <div className="tutor-chat__input-row">
+        <div className="tutor-chat__input-row input-bar">
           <button
             type="button"
             className={`tutor-chat__mic-btn${listening ? ' tutor-chat__mic-btn--live' : ''}`}

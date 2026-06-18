@@ -1,0 +1,692 @@
+/* 番茄闹钟 — 三屏参考图 1:1 还原（320×240） */
+
+.pomodoro-page--work {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background: transparent;
+}
+
+.pomo-ref {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: #fff;
+  background: transparent;
+}
+
+/* ---------- 背景（纯渐变 + SVG 装饰，无参考图 UI） ---------- */
+.pomo-ref__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #2e3c50 0%,
+    #2a384c 28%,
+    #263244 55%,
+    #222e40 78%,
+    #1e2838 100%
+  );
+}
+
+.pomo-ref__bg-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+.pomo-ref > *:not(.pomo-ref__bg):not(.pomo-confetti) {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- 顶栏（图 1） ---------- */
+.pomo-ref .pomo-work__topbar {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: calc(28 * var(--ui-px)) 1fr calc(28 * var(--ui-px));
+  align-items: center;
+  min-height: calc(34 * var(--ui-px));
+  padding: calc(5 * var(--ui-px)) calc(8 * var(--ui-px)) 0;
+}
+
+.pomo-ref .pomo-work__icon-btn {
+  width: calc(28 * var(--ui-px));
+  height: calc(28 * var(--ui-px));
+  padding: 0;
+  border-radius: calc(10 * var(--ui-px));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pomo-ref .pomo-work__topbar-title {
+  margin: 0;
+  text-align: center;
+  font-size: calc(12 * var(--ui-px));
+  font-weight: 700;
+}
+
+.pomo-ref .pomo-work__topbar-spacer {
+  width: calc(28 * var(--ui-px));
+  height: calc(28 * var(--ui-px));
+}
+
+.pomo-ref__main {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 calc(10 * var(--ui-px)) calc(6 * var(--ui-px));
+}
+
+/* ---------- 图 1：准备页 ---------- */
+.pomo-ref--ready .pomo-ref__main {
+  justify-content: space-between;
+  padding-top: calc(2 * var(--ui-px));
+  padding-bottom: calc(6 * var(--ui-px));
+  gap: calc(4 * var(--ui-px));
+}
+
+.pomo-ref__ready-top {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: calc(6 * var(--ui-px));
+}
+
+.pomo-ref__ready-bottom {
+  flex-shrink: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(5 * var(--ui-px));
+}
+
+.pomo-ref__ready-dial {
+  position: relative;
+  width: calc(124 * var(--ui-px));
+  height: calc(124 * var(--ui-px));
+  flex-shrink: 0;
+}
+
+.pomo-ref__ready-task {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(5 * var(--ui-px));
+  max-width: 100%;
+  padding: calc(3 * var(--ui-px)) calc(10 * var(--ui-px));
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.pomo-ref__ready-task-icon {
+  font-size: calc(11 * var(--ui-px));
+  line-height: 1;
+}
+
+.pomo-ref__ready-task-name {
+  font-size: calc(10 * var(--ui-px));
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.88);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(180 * var(--ui-px));
+}
+
+/* ---------- 今日专注总结 ---------- */
+.pomo-ref__daily {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: calc(248 * var(--ui-px));
+  max-height: calc(48 * var(--ui-px));
+  padding: calc(5 * var(--ui-px)) calc(10 * var(--ui-px));
+  border-radius: calc(10 * var(--ui-px));
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.pomo-ref__daily-cheer {
+  margin: 0;
+  font-size: calc(10 * var(--ui-px));
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.2;
+}
+
+.pomo-ref__daily-hint {
+  margin: calc(2 * var(--ui-px)) 0 0;
+  font-size: calc(7 * var(--ui-px));
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.2;
+}
+
+.pomo-ref__daily-data {
+  margin: calc(3 * var(--ui-px)) 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(12 * var(--ui-px));
+}
+
+.pomo-ref__daily-stat {
+  font-size: calc(8 * var(--ui-px));
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.38);
+  font-variant-numeric: tabular-nums;
+}
+
+.pomo-ref__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.pomo-ref__ring--focus .pomo-ref__ring-arc {
+  stroke: #ff8c69;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 calc(4 * var(--ui-px)) rgba(255, 140, 105, 0.9));
+}
+
+.pomo-ref__ring--focus .pomo-ref__ring-dot {
+  fill: #ff8c69;
+  filter: drop-shadow(0 0 calc(3 * var(--ui-px)) rgba(255, 140, 105, 0.95));
+}
+
+.pomo-ref__ring--break .pomo-ref__ring-arc {
+  stroke: #98fb98;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 calc(4 * var(--ui-px)) rgba(152, 251, 152, 0.85));
+}
+
+.pomo-ref__ring--break .pomo-ref__ring-dot {
+  fill: #98fb98;
+  filter: drop-shadow(0 0 calc(3 * var(--ui-px)) rgba(152, 251, 152, 0.9));
+}
+
+.pomo-ref__peach-orb {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(104 * var(--ui-px));
+  height: calc(104 * var(--ui-px));
+  transform: translate(-50%, -50%);
+}
+
+.pomo-ref__peach-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  filter: drop-shadow(0 calc(5 * var(--ui-px)) calc(16 * var(--ui-px)) rgba(255, 110, 80, 0.32));
+}
+
+.pomo-ref__peach-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(8 * var(--ui-px));
+  pointer-events: none;
+}
+
+.pomo-ref__peach-num {
+  font-family: var(--font-body);
+  font-size: calc(36 * var(--ui-px));
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: #fff;
+  text-shadow: 0 calc(1 * var(--ui-px)) calc(6 * var(--ui-px)) rgba(120, 40, 30, 0.22);
+}
+
+.pomo-ref__peach-unit {
+  margin-top: calc(3 * var(--ui-px));
+  font-size: calc(11 * var(--ui-px));
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.pomo-ref__start-btn {
+  width: 100%;
+  max-width: calc(236 * var(--ui-px));
+  min-height: calc(36 * var(--ui-px));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(8 * var(--ui-px));
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff9d7a 0%, #ff7550 48%, #ff6347 100%);
+  box-shadow:
+    0 calc(4 * var(--ui-px)) calc(18 * var(--ui-px)) rgba(255, 99, 71, 0.42),
+    0 0 calc(12 * var(--ui-px)) rgba(255, 120, 90, 0.18);
+  font-size: calc(13 * var(--ui-px));
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pomo-ref__start-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- 图 2 / 图 3：计时主区 ---------- */
+.pomo-ref--focus .pomo-ref__main,
+.pomo-ref--break .pomo-ref__main {
+  justify-content: space-between;
+  padding-top: calc(2 * var(--ui-px));
+  padding-bottom: calc(8 * var(--ui-px));
+}
+
+.pomo-ref--focus .pomo-ref__focus-dial,
+.pomo-ref--break .pomo-ref__break-dial {
+  flex-shrink: 0;
+}
+
+.pomo-ref--focus .pomo-ref__controls,
+.pomo-ref--break .pomo-ref__controls {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.pomo-ref--break .pomo-ref__controls {
+  width: auto;
+  max-width: none;
+  justify-content: center;
+}
+
+/* ---------- 图 2：专注页 ---------- */
+.pomo-ref__focus-head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(4 * var(--ui-px)) calc(10 * var(--ui-px)) 0;
+}
+
+.pomo-ref__pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: calc(24 * var(--ui-px));
+  padding: 0 calc(12 * var(--ui-px));
+  border-radius: calc(12 * var(--ui-px));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  font-size: calc(11 * var(--ui-px));
+  font-weight: 700;
+}
+
+.pomo-ref__focus-dial {
+  position: relative;
+  width: calc(152 * var(--ui-px));
+  height: calc(152 * var(--ui-px));
+}
+
+.pomo-ref__glass {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(108 * var(--ui-px));
+  height: calc(108 * var(--ui-px));
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(calc(10 * var(--ui-px)));
+  box-shadow:
+    inset 0 0 calc(24 * var(--ui-px)) rgba(255, 255, 255, 0.05),
+    0 calc(8 * var(--ui-px)) calc(24 * var(--ui-px)) rgba(0, 0, 0, 0.28);
+}
+
+.pomo-ref__timer {
+  font-family: var(--font-body);
+  font-size: calc(30 * var(--ui-px));
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- 图 3：休息页 ---------- */
+.pomo-ref__break-head {
+  flex-shrink: 0;
+  display: grid;
+  grid-template-columns: calc(28 * var(--ui-px)) 1fr auto;
+  align-items: center;
+  gap: calc(6 * var(--ui-px));
+  padding: calc(4 * var(--ui-px)) calc(10 * var(--ui-px)) 0;
+}
+
+.pomo-ref__back-btn {
+  width: calc(28 * var(--ui-px));
+  height: calc(28 * var(--ui-px));
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: calc(10 * var(--ui-px));
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pomo-ref__break-title {
+  font-size: calc(14 * var(--ui-px));
+  font-weight: 800;
+}
+
+.pomo-ref__break-dial {
+  position: relative;
+  width: calc(152 * var(--ui-px));
+  height: calc(152 * var(--ui-px));
+}
+
+.pomo-ref__timer--break {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: calc(32 * var(--ui-px));
+}
+
+/* ---------- 底部控制栏（图 2 / 图 3） ---------- */
+.pomo-ref__controls {
+  width: 100%;
+  max-width: calc(248 * var(--ui-px));
+  display: flex;
+  align-items: center;
+  gap: calc(6 * var(--ui-px));
+  margin-top: calc(4 * var(--ui-px));
+}
+
+.pomo-ref__ctrl {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.pomo-ref__ctrl--pause-focus {
+  flex: 0 0 calc(72 * var(--ui-px));
+  height: calc(38 * var(--ui-px));
+  border-radius: calc(19 * var(--ui-px));
+  border: none;
+  background: linear-gradient(180deg, #ff9d7a 0%, #ff7550 100%);
+  box-shadow: 0 calc(4 * var(--ui-px)) calc(14 * var(--ui-px)) rgba(255, 99, 71, 0.35);
+}
+
+.pomo-ref__ctrl--pause-break {
+  flex: 0 0 calc(72 * var(--ui-px));
+  height: calc(38 * var(--ui-px));
+  border-radius: calc(19 * var(--ui-px));
+  border: none;
+  background: linear-gradient(180deg, #b6ffc8 0%, #98fb98 100%);
+  box-shadow: 0 calc(4 * var(--ui-px)) calc(14 * var(--ui-px)) rgba(152, 251, 152, 0.28);
+}
+
+.pomo-ref__ctrl--next {
+  flex: 1;
+  min-width: 0;
+  height: calc(38 * var(--ui-px));
+  border-radius: calc(12 * var(--ui-px));
+  font-size: calc(10 * var(--ui-px));
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.pomo-ref__ctrl--skip,
+.pomo-ref__ctrl--check {
+  flex: 0 0 calc(38 * var(--ui-px));
+  height: calc(38 * var(--ui-px));
+  border-radius: calc(12 * var(--ui-px));
+  font-size: calc(16 * var(--ui-px));
+  font-weight: 700;
+}
+
+.pomo-ref__skip-icon {
+  width: calc(22 * var(--ui-px));
+  height: calc(22 * var(--ui-px));
+  display: block;
+}
+
+.pomo-ref__pause-icon {
+  width: calc(22 * var(--ui-px));
+  height: calc(22 * var(--ui-px));
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: calc(3 * var(--ui-px));
+}
+
+.pomo-ref__pause-icon span {
+  width: calc(3 * var(--ui-px));
+  height: calc(10 * var(--ui-px));
+  border-radius: calc(1 * var(--ui-px));
+  background: #fff;
+}
+
+.pomo-ref__pause-icon--dark span {
+  background: #1a3d28;
+}
+
+/* ---------- 选任务页（深色统一） ---------- */
+.pomo-ref--pick {
+  height: 100%;
+}
+
+.pomo-ref--pick .pomo-ref__main {
+  justify-content: flex-start;
+  gap: calc(6 * var(--ui-px));
+  padding-top: calc(4 * var(--ui-px));
+}
+
+.pomo-ref--pick .pomo-ref__task-list {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.pomo-ref--pick .pomo-work__topbar-title {
+  font-size: calc(14 * var(--ui-px));
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.pomo-ref__pick-title {
+  margin: 0;
+  font-size: calc(9 * var(--ui-px));
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.52);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.pomo-ref__task-list {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: calc(5 * var(--ui-px));
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.pomo-ref__task-list::-webkit-scrollbar {
+  display: none;
+}
+
+.pomo-ref__task-item {
+  width: 100%;
+  min-height: calc(34 * var(--ui-px));
+  padding: calc(7 * var(--ui-px)) calc(10 * var(--ui-px));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: calc(12 * var(--ui-px));
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: calc(8 * var(--ui-px));
+  cursor: pointer;
+  text-align: left;
+}
+
+.pomo-ref__task-icon {
+  font-size: calc(15 * var(--ui-px));
+}
+
+.pomo-ref__task-name {
+  flex: 1;
+  font-size: calc(10 * var(--ui-px));
+  font-weight: 700;
+}
+
+.pomo-ref__task-tag {
+  font-size: calc(7 * var(--ui-px));
+  padding: calc(2 * var(--ui-px)) calc(5 * var(--ui-px));
+  border-radius: 999px;
+  background: rgba(255, 120, 80, 0.16);
+  color: #ffb08a;
+}
+
+/* ---------- 完成页 ---------- */
+.pomo-ref--done .pomo-ref__main {
+  gap: calc(8 * var(--ui-px));
+}
+
+.pomo-ref__done-title {
+  margin: 0;
+  font-size: calc(16 * var(--ui-px));
+  font-weight: 800;
+  color: var(--color-text-strong, #fff);
+}
+
+.pomo-ref__done-meta {
+  margin: 0;
+  font-size: calc(9 * var(--ui-px));
+  font-weight: 600;
+  color: var(--color-text, rgba(255, 255, 255, 0.75));
+}
+
+.pomo-ref__pill--done {
+  color: #3d8b52;
+  border-color: rgba(111, 207, 122, 0.35);
+  background: rgba(152, 251, 152, 0.18);
+}
+
+/* ---------- 设置时长（准备页内嵌） ---------- */
+.pomo-ref--ready-settings .pomo-ref__main--settings {
+  justify-content: center;
+  padding: calc(4 * var(--ui-px)) calc(12 * var(--ui-px)) calc(10 * var(--ui-px));
+}
+
+.pomo-ref__settings {
+  width: 100%;
+  max-width: calc(248 * var(--ui-px));
+  padding: calc(12 * var(--ui-px)) calc(10 * var(--ui-px)) calc(10 * var(--ui-px));
+  border-radius: calc(14 * var(--ui-px));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(22, 30, 44, 0.82);
+  backdrop-filter: blur(calc(10 * var(--ui-px)));
+  box-shadow: 0 calc(6 * var(--ui-px)) calc(20 * var(--ui-px)) rgba(0, 0, 0, 0.22);
+}
+
+.pomo-ref__settings-title {
+  margin: 0;
+  font-size: calc(12 * var(--ui-px));
+  font-weight: 800;
+  text-align: center;
+}
+
+.pomo-ref__settings-sub {
+  margin: calc(3 * var(--ui-px)) 0 calc(10 * var(--ui-px));
+  font-size: calc(8 * var(--ui-px));
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+}
+
+.pomo-ref__settings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(6 * var(--ui-px));
+}
+
+.pomo-ref__settings-opt {
+  min-height: calc(34 * var(--ui-px));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: calc(10 * var(--ui-px));
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-size: calc(9 * var(--ui-px));
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.pomo-ref__settings-opt--active {
+  border-color: rgba(255, 140, 105, 0.6);
+  background: rgba(255, 120, 80, 0.16);
+  color: #ffb08a;
+  box-shadow: 0 0 0 calc(1 * var(--ui-px)) rgba(255, 140, 105, 0.25);
+}
+
+.pomo-ref__settings-done {
+  width: 100%;
+  margin-top: calc(10 * var(--ui-px));
+  min-height: calc(36 * var(--ui-px));
+  border: none;
+  border-radius: calc(12 * var(--ui-px));
+  background: linear-gradient(180deg, #ff9d7a 0%, #ff7550 100%);
+  color: #fff;
+  font-size: calc(11 * var(--ui-px));
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 calc(3 * var(--ui-px)) calc(12 * var(--ui-px)) rgba(255, 99, 71, 0.28);
+}

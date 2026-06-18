@@ -1,16 +1,16 @@
+import { getLocalDateKey, getYesterdayLocalDateKey } from './localDate'
+
 const STARS_KEY = 'pomodoro_stars'
 const STATS_KEY = 'pomodoro_daily_stats'
 const STREAK_KEY = 'pomodoro_streak'
 const LAST_DAY_KEY = 'pomodoro_last_day'
 
 function todayKey() {
-  return new Date().toISOString().slice(0, 10)
+  return getLocalDateKey()
 }
 
 function yesterdayKey() {
-  const d = new Date()
-  d.setDate(d.getDate() - 1)
-  return d.toISOString().slice(0, 10)
+  return getYesterdayLocalDateKey()
 }
 
 export function getStars() {

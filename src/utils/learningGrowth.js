@@ -5,6 +5,7 @@ import {
   getTodayRounds,
   recordRoundComplete,
 } from './pomodoroStorage'
+import { getLocalDateKey } from './localDate'
 
 const POINTS_KEY = 'learning_points'
 const MINUTES_KEY = 'learning_daily_minutes'
@@ -12,7 +13,7 @@ const DEMO_SEED_KEY = 'learning_demo_seeded'
 const GROWTH_EVENT = 'learning-growth-update'
 
 function todayKey() {
-  return new Date().toISOString().slice(0, 10)
+  return getLocalDateKey()
 }
 
 export function notifyGrowthUpdate() {

@@ -37,3 +37,17 @@ export function clearActiveStatuses(dayIndex) {
   savePlanForDay(dayIndex, tasks)
   return tasks
 }
+
+export function updatePlanTask(dayIndex, taskId, patch) {
+  const tasks = getPlanForDay(dayIndex).map((task) =>
+    task.id === taskId ? { ...task, ...patch } : task,
+  )
+  savePlanForDay(dayIndex, tasks)
+  return tasks
+}
+
+export function removePlanTask(dayIndex, taskId) {
+  const tasks = getPlanForDay(dayIndex).filter((task) => task.id !== taskId)
+  savePlanForDay(dayIndex, tasks)
+  return tasks
+}

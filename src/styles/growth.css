@@ -202,7 +202,32 @@
 }
 
 .device-growth-header--asset {
-  padding: 0 10px 6px;
+  padding: 0 10px 4px;
+}
+
+.os-page--ai .growth-strip--asset {
+  gap: 6px;
+  padding: 5px 8px;
+}
+
+.os-page--ai .growth-strip--asset .growth-strip__item {
+  padding: 3px 2px;
+}
+
+.os-page--ai .growth-strip--asset .growth-strip__icon {
+  font-size: 12px;
+}
+
+.os-page--ai .growth-strip--asset .growth-strip__icon--star {
+  font-size: 14px;
+}
+
+.os-page--ai .growth-strip--asset .growth-strip__value {
+  font-size: 12px;
+}
+
+.os-page--ai .growth-strip--asset .growth-strip__label {
+  font-size: 8px;
 }
 
 .home-dash {

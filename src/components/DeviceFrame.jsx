@@ -1,28 +1,7 @@
 import { useEffect, useState } from 'react'
-import HardwareHomeKey from './device/HardwareHomeKey'
-import shellRef from '../assets/chick-device-ref.png'
 
 export const SCREEN_LOGICAL_W = 320
-export const SCREEN_LOGICAL_H = 258
-
-/*
- * 参考图 1024×985 — 像素校准后的 LCD 内腔（不超出黄边黑框）
- * 底层：完整外壳图  中层：黑色屏幕容器  顶层：Home 键 + 屏内 UI
- */
-const SHELL_W = 1024
-const SHELL_H = 985
-const SCREEN_X = 196
-const SCREEN_Y = 303
-const SCREEN_W = 626
-const SCREEN_H = 504
-const SCREEN_R = 28
-const HOME_CX = 512
-const HOME_CY = 850
-const HOME_D = 53
-
-function pct(value, base) {
-  return `${(value / base) * 100}%`
-}
+export const SCREEN_LOGICAL_H = 240
 
 function VolumeIcon({ className = '', muted = false }) {
   return (
@@ -118,9 +97,9 @@ function ScreenStatusBar({ batteryLevel = 85, wifiConnected = true, volumeMuted 
   }, [])
 
   return (
-    <header className="screen-status">
+    <header className="screen-status status-bar">
       <span className="screen-status__time">{time}</span>
-      <div className="screen-status__indicators">
+      <div className="screen-status__indicators status-bar-right">
         <WifiIcon connected={wifiConnected} />
         <VolumeIcon muted={volumeMuted} />
         <BatteryIcon level={batteryLevel} />
@@ -137,42 +116,18 @@ export default function DeviceFrame({
   children,
   batteryLevel = 85,
   wifiConnected = true,
-  showLabel = false,
+  showLabel = true,
 }) {
-  const geometry = {
-    '--shell-bg': `url(${shellRef})`,
-    '--screen-x': pct(SCREEN_X, SHELL_W),
-    '--screen-y': pct(SCREEN_Y, SHELL_H),
-    '--screen-w': pct(SCREEN_W, SHELL_W),
-    '--screen-h': pct(SCREEN_H, SHELL_H),
-    '--screen-rx': pct(SCREEN_R, SCREEN_W),
-    '--screen-ry': pct(SCREEN_R, SCREEN_H),
-    '--ui-logical-w': SCREEN_LOGICAL_W,
-    '--ui-logical-h': SCREEN_LOGICAL_H,
-    '--home-x': `calc(${pct(HOME_CX, SHELL_W)} - ${pct(HOME_D / 2, SHELL_W)})`,
-    '--home-y': `calc(${pct(HOME_CY, SHELL_H)} - ${pct(HOME_D / 2, SHELL_H)})`,
-    '--home-d': pct(HOME_D, SHELL_W),
-  }
-
   return (
     <div className="device-preview">
-      <div className="device-viewport" style={geometry}>
-        {/* Layer 1 — 完整硬件外壳（不做任何裁剪或补丁） */}
-        <div className="device-shell" inert="" aria-hidden="true" />
-
-        {/* Layer 2 — 黑色屏幕容器，精确卡在外壳 LCD 内腔 */}
-        <div className="device-screen">
-          <ScreenStatusBar batteryLevel={batteryLevel} wifiConnected={wifiConnected} />
-          <div className="device-screen__content">{children}</div>
-        </div>
-
-        {/* Layer 3 — 物理 Home 键（外壳上的唯一黄色控件） */}
-        <HardwareHomeKey />
+      <div className="device-screen" data-screen-w={SCREEN_LOGICAL_W} data-screen-h={SCREEN_LOGICAL_H}>
+        <ScreenStatusBar batteryLevel={batteryLevel} wifiConnected={wifiConnected} />
+        <div className="device-screen__content">{children}</div>
       </div>
 
       {showLabel && (
         <p className="device-preview__label">
-          {SCREEN_LOGICAL_W} × {SCREEN_LOGICAL_H} · 嵌入式一体屏
+          {SCREEN_LOGICAL_W} × {SCREEN_LOGICAL_H} · 硬件屏幕模拟器
         </p>
       )}
     </div>

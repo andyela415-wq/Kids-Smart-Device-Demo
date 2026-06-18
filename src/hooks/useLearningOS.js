@@ -24,6 +24,7 @@ import {
   sortPlanTasks,
 } from '../utils/schedulePlan'
 import { getWeekDayTasks, setWeekDayTasks } from '../utils/weeklyPlan'
+import { setPomodoroReturnTo } from '../utils/pomodoroReturn'
 import { speakText } from '../utils/voiceReminder'
 
 export function useLearningOS() {
@@ -93,6 +94,34 @@ export function useLearningOS() {
 
   useEffect(() => () => stopAlarmSound(), [])
 
+  const launchPlanTaskToPomodoro = useCallback(
+    (task, index) => {
+      if (task.source !== 'demo' && index >= 0) {
+        const today = getTodayDayIndex()
+        const tasks = getPlanForDay(today)
+        const updated = tasks.map((t, i) => ({
+          ...t,
+          status: i === index ? 'active' : t.status,
+        }))
+        savePlanForDay(today, updated)
+        setPlanTasks(updated)
+        setHighlightIndex(index)
+        markAlarmFired(task.id)
+        clearSnooze(task.id)
+      }
+
+      launchRef.current = {
+        task,
+        index,
+        returnTo: '/plan',
+        ...mapTaskToPomodoroLaunch(task),
+      }
+      setPomodoroReturnTo('/plan')
+      navigate('/pomodoro')
+    },
+    [navigate],
+  )
+
   const confirmAlarmReady = useCallback(() => {
     if (!alarmTask) return
 
@@ -102,33 +131,21 @@ export function useLearningOS() {
       const index = tasks.findIndex((t) => t.id === alarmTask.id)
       if (index < 0) return
 
-      const updated = tasks.map((t, i) => ({
-        ...t,
-        status: i === index ? 'active' : t.status,
-      }))
-      savePlanForDay(today, updated)
-      setPlanTasks(updated)
-      setHighlightIndex(index)
-
-      markAlarmFired(alarmTask.id)
-      clearSnooze(alarmTask.id)
-
-      launchRef.current = {
-        task: alarmTask,
-        index,
-        ...mapTaskToPomodoroLaunch(alarmTask),
-      }
-    } else {
-      launchRef.current = {
-        task: alarmTask,
-        index: -1,
-        ...mapTaskToPomodoroLaunch(alarmTask),
-      }
+      dismissAlarm()
+      launchPlanTaskToPomodoro(alarmTask, index)
+      return
     }
 
+    launchRef.current = {
+      task: alarmTask,
+      index: -1,
+      returnTo: '/plan',
+      ...mapTaskToPomodoroLaunch(alarmTask),
+    }
+    setPomodoroReturnTo('/plan')
     dismissAlarm()
     navigate('/pomodoro')
-  }, [alarmTask, dismissAlarm, navigate])
+  }, [alarmTask, dismissAlarm, launchPlanTaskToPomodoro, navigate])
 
   const snoozeAlarm = useCallback(() => {
     if (!alarmTask) return
@@ -208,6 +225,19 @@ export function useLearningOS() {
     [refreshPlan],
   )
 
+  const persistPlanDay = useCallback(
+    (tasks) => {
+      const merged = ensureSleepInTasks(sortPlanTasks(tasks), planDay)
+      setWeekDayTasks(planDay, merged)
+      setPlanTasks(merged)
+      if (planDay === getTodayDayIndex()) {
+        setHighlightIndex(findHighlightTaskIndex(merged))
+      }
+      return merged
+    },
+    [planDay],
+  )
+
   const addPlanTask = useCallback(
     (preset) => {
       const tasks = [...getPlanForDay(planDay)]
@@ -216,37 +246,71 @@ export function useLearningOS() {
         startTime: preset.startTime || '20:00',
         icon: preset.icon,
         title: preset.title,
-        durationMinutes: 20,
+        durationMinutes: preset.durationMinutes || 20,
         type: preset.type || 'study',
         enableWater: preset.type === 'study' || preset.type === 'review',
         status: 'pending',
         source: 'custom',
       }
-      const merged = ensureSleepInTasks(sortPlanTasks([...tasks, newTask]), planDay)
-      setWeekDayTasks(planDay, merged)
-      setPlanTasks(merged)
-      if (planDay === getTodayDayIndex()) {
-        setHighlightIndex(findHighlightTaskIndex(merged))
-      }
+      persistPlanDay([...tasks, newTask])
     },
-    [planDay],
+    [persistPlanDay, planDay],
+  )
+
+  const updatePlanTask = useCallback(
+    (taskId, patch) => {
+      const tasks = getPlanForDay(planDay).map((task) => {
+        if (task.id !== taskId) return task
+        const nextType = patch.type ?? task.type
+        return {
+          ...task,
+          ...patch,
+          enableWater: nextType === 'study' || nextType === 'review',
+        }
+      })
+      persistPlanDay(tasks)
+    },
+    [persistPlanDay, planDay],
+  )
+
+  const deletePlanTask = useCallback(
+    (taskId) => {
+      const tasks = getPlanForDay(planDay).filter((task) => task.id !== taskId)
+      persistPlanDay(tasks)
+    },
+    [persistPlanDay, planDay],
+  )
+
+  const movePlanTask = useCallback(
+    (taskId, direction) => {
+      const sorted = sortPlanTasks(getPlanForDay(planDay))
+      const index = sorted.findIndex((task) => task.id === taskId)
+      const swapIndex = direction === 'up' ? index - 1 : index + 1
+      if (index < 0 || swapIndex < 0 || swapIndex >= sorted.length) return
+
+      const current = sorted[index]
+      const neighbor = sorted[swapIndex]
+      const tasks = getPlanForDay(planDay).map((task) => {
+        if (task.id === current.id) return { ...task, startTime: neighbor.startTime }
+        if (task.id === neighbor.id) return { ...task, startTime: current.startTime }
+        return task
+      })
+      persistPlanDay(tasks)
+    },
+    [persistPlanDay, planDay],
   )
 
   const togglePlanTaskDone = useCallback(
     (taskId) => {
-      const tasks = getPlanForDay(planDay)
-      const updated = tasks.map((task) =>
-        task.id === taskId && task.status === 'pending'
-          ? { ...task, status: 'done' }
-          : task,
-      )
-      setWeekDayTasks(planDay, updated)
-      setPlanTasks(updated)
-      if (planDay === getTodayDayIndex()) {
-        setHighlightIndex(findHighlightTaskIndex(updated))
-      }
+      const tasks = getPlanForDay(planDay).map((task) => {
+        if (task.id !== taskId) return task
+        if (task.status === 'pending') return { ...task, status: 'done' }
+        if (task.status === 'done') return { ...task, status: 'pending' }
+        return task
+      })
+      persistPlanDay(tasks)
     },
-    [planDay],
+    [persistPlanDay, planDay],
   )
 
   const startPomodoroFromPlan = useCallback(() => {
@@ -255,11 +319,12 @@ export function useLearningOS() {
     const index = findHighlightTaskIndex(tasks)
     const task = index >= 0 ? tasks[index] : null
     if (task && task.status === 'pending') {
-      previewAlarm(task)
+      launchPlanTaskToPomodoro(task, index)
       return
     }
+    setPomodoroReturnTo('/plan')
     navigate('/pomodoro')
-  }, [navigate, previewAlarm, refreshPlan])
+  }, [launchPlanTaskToPomodoro, navigate, refreshPlan])
 
   const resetAiFlow = useCallback(() => {
     setAiPage('select')
@@ -284,6 +349,9 @@ export function useLearningOS() {
     planTasks,
     switchPlanDay,
     addPlanTask,
+    updatePlanTask,
+    deletePlanTask,
+    movePlanTask,
     togglePlanTaskDone,
     startPomodoroFromPlan,
     refreshPlan,

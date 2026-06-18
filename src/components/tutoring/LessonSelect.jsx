@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import { LESSONS } from '../../config/tutoringLessons'
-import AutumnRainCover from './AutumnRainCover'
+
+const LESSON_COVER_BY_ID = {
+  'g3-autumn-rain': "url('/lessons/autumn-rain-cover.svg')",
+}
 
 function StartButton({ label, onClick }) {
   const [pressed, setPressed] = useState(false)
@@ -25,14 +28,6 @@ function StartButton({ label, onClick }) {
   )
 }
 
-function LessonCoverArt({ lessonId, className = '' }) {
-  if (lessonId === 'g3-autumn-rain') {
-    return <AutumnRainCover className={className} />
-  }
-
-  return null
-}
-
 export default function LessonSelect({ lessonId, onSelect, onStart }) {
   const selectedLesson = LESSONS.find((lesson) => lesson.id === lessonId) || LESSONS[0]
 
@@ -43,6 +38,7 @@ export default function LessonSelect({ lessonId, onSelect, onStart }) {
       <div className="tutor-select__list" role="listbox" aria-label="课文列表">
         {LESSONS.map((lesson) => {
           const selected = lesson.id === lessonId
+          const coverImage = LESSON_COVER_BY_ID[lesson.id]
 
           return (
             <button
@@ -50,25 +46,14 @@ export default function LessonSelect({ lessonId, onSelect, onStart }) {
               type="button"
               role="option"
               aria-selected={selected}
-              className={`tutor-select__card${selected ? ' tutor-select__card--on' : ''}`}
-              style={{ '--lesson-accent': lesson.accent }}
+              aria-label={`选择《${lesson.title}》`}
+              className={`lesson-card tutor-select__card${selected ? ' lesson-card--on' : ''}${coverImage ? ' lesson-card--illustrated' : ''}`}
+              style={coverImage ? { '--lesson-cover': coverImage } : undefined}
               onClick={() => onSelect(lesson.id)}
             >
-              <span className="tutor-select__card-bezel">
-                <span className="tutor-select__card-surface">
-                  <span className="tutor-select__card-art">
-                    <LessonCoverArt lessonId={lesson.id} className="tutor-select__cover" />
-                    <span className="tutor-select__card-art-shade" aria-hidden="true" />
-                  </span>
-                  <span className="tutor-select__card-content">
-                    <span className="tutor-select__grade">{lesson.grade}</span>
-                    <span className="tutor-select__title">《{lesson.title}》</span>
-                    {lesson.tagline && (
-                      <span className="tutor-select__tagline">{lesson.tagline}</span>
-                    )}
-                    {selected && <span className="tutor-select__check">已选</span>}
-                  </span>
-                </span>
+              <span className="lesson-card__text">
+                <span className="lesson-card__grade">{lesson.grade}</span>
+                <span className="lesson-card__title">《{lesson.title}》</span>
               </span>
             </button>
           )

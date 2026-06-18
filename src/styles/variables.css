@@ -1,60 +1,75 @@
 :root {
-  /* 屏幕逻辑尺寸 */
+  /* 硬件屏幕逻辑分辨率 */
   --screen-width: 320px;
   --screen-height: 240px;
+  --ui-px: 1px;
 
-  /* 主色 - 儿童机器人暖色调 */
-  --color-primary: #5eb8ff;
-  --color-primary-dark: #3da5f5;
-  --color-secondary: #7ee8a2;
-  --color-accent: #ffb347;
-  --color-warm: #ff9a76;
-  --color-danger: #ff7b7b;
-
-  /* 背景与表面 */
-  --color-bg: #eef6fc;
-  --color-bg-warm: #fff8f0;
-  --color-surface: #ffffff;
-  --color-surface-alt: #f5f9ff;
-
-  /* 文字 */
-  --color-text: #3d4f5f;
-  --color-text-secondary: #7a8fa0;
+  /* Apple 极简 + 韩国奶油 + 莫兰迪 */
+  --color-cream: #fdfbf7;
+  --color-cream-deep: #f7f3eb;
+  --color-card-blue: #eff6ff;
+  --color-card-yellow: #fffbeb;
+  --color-card-mint: #f0fdf4;
+  --color-accent-orange: #ff823a;
+  --color-accent-orange-deep: #e86a24;
+  --color-accent-yellow: #f2c94c;
+  --color-text: #5c6470;
+  --color-text-strong: #3d4450;
+  --color-text-secondary: #9ba3ad;
   --color-text-inverse: #ffffff;
+  --color-text-on-orange: #ffffff;
 
-  /* 边框与阴影 - 柔和 */
-  --color-border: #d4e4f0;
-  --radius-sm: 4px;
-  --radius-md: 7px;
-  --radius-lg: 10px;
+  /* 兼容旧变量名 */
+  --color-primary: var(--color-accent-orange);
+  --color-primary-dark: var(--color-accent-orange-deep);
+  --color-secondary: #a8d5ba;
+  --color-accent: var(--color-accent-yellow);
+  --color-warm: var(--color-accent-orange);
+  --color-danger: #e57373;
+  --color-bg: var(--color-cream);
+  --color-bg-warm: var(--color-card-yellow);
+  --color-surface: var(--color-card-blue);
+  --color-surface-alt: var(--color-card-yellow);
+  --color-border: transparent;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-card: 16px;
   --radius-pill: 999px;
-  --shadow-soft: 0 1px 4px rgba(94, 184, 255, 0.12);
-  --shadow-card: 0 2px 5px rgba(61, 79, 95, 0.06);
+  --shadow-press: 0 4px 0 rgba(0, 0, 0, 0.05);
+  --shadow-soft: 0 2px 8px rgba(92, 100, 112, 0.06);
+  --shadow-card: var(--shadow-soft);
 
-  /* 间距（整体缩小 30%） */
-  --space-xs: 3px;
-  --space-sm: 4px;
-  --space-md: 6px;
-  --space-lg: 8px;
-  --space-xl: 11px;
+  --page-padding: 10px;
+  --page-padding-lg: 12px;
 
-  /* 字体 - 儿童友好 */
+  --space-xs: 4px;
+  --space-sm: 6px;
+  --space-md: 8px;
+  --space-lg: 10px;
+  --space-xl: 12px;
+
   --font-title: 'ZCOOL KuaiLe', 'Yuanti SC', 'STYuanti', 'PingFang SC', cursive;
   --font-body: 'Nunito', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  --font-size-xs: 7px;
-  --font-size-sm: 8px;
-  --font-size-md: 9px;
-  --font-size-lg: 11px;
-  --font-size-xl: 13px;
-  --font-size-display: 15px;
+
+  --font-size-status: 12px;
+  --font-size-body: 16px;
+  --font-size-title: 20px;
+  --font-size-display: 24px;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
   --font-weight-normal: 600;
+  --font-weight-body: 600;
   --font-weight-bold: 700;
 
-  /* 触控目标（缩小 30%） */
-  --btn-height: 25px;
-  --btn-height-lg: 31px;
-  --icon-size: 20px;
-  --status-height: 15px;
-  --topbar-height: 22px;
-  --footer-height: 22px;
+  --status-height: 20px;
+  --topbar-height: 28px;
+  --footer-height: 28px;
+  --btn-height: 32px;
+  --btn-height-lg: 36px;
+  --icon-size: 24px;
 }

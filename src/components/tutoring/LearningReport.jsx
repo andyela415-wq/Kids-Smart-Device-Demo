@@ -99,7 +99,7 @@ function PlanStartButton({ onClick }) {
   )
 }
 
-export default function LearningReport({ lesson, onStartChat, onGeneratePlan }) {
+export default function LearningReport({ lesson, onStartChat, onGeneratePlan, onBack }) {
   const { report } = lesson
   const [quizPick, setQuizPick] = useState(null)
   const [quizFeedback, setQuizFeedback] = useState('')
@@ -119,11 +119,20 @@ export default function LearningReport({ lesson, onStartChat, onGeneratePlan }) 
   return (
     <main className="tutor-report">
       <header className="tutor-report__head">
+        {onBack ? (
+          <button type="button" className="tutor-report__back" aria-label="返回" onClick={onBack}>
+            ‹
+          </button>
+        ) : (
+          <span className="tutor-report__head-spacer" aria-hidden="true" />
+        )}
         <p className="tutor-report__step">今日收获 ✨</p>
-        <p className="tutor-report__subtitle">{report.tip}</p>
+        <span className="tutor-report__head-spacer" aria-hidden="true" />
       </header>
 
       <div className="tutor-report__scroll">
+        <p className="tutor-report__subtitle summary-text">{report.tip}</p>
+
         <section className="tutor-report__block">
           <h2 className="tutor-report__label">重点词语 · 加深理解</h2>
           {report.vocabularyGroups.map((group) => (
@@ -204,12 +213,12 @@ export default function LearningReport({ lesson, onStartChat, onGeneratePlan }) 
           </div>
           {quizFeedback && <p className="tutor-report__quiz-feedback">{quizFeedback}</p>}
         </section>
-      </div>
 
-      <footer className="tutor-report__footer">
-        <ChatStartButton onClick={onStartChat} />
-        {onGeneratePlan && <PlanStartButton onClick={onGeneratePlan} />}
-      </footer>
+        <div className="tutor-report__footer bottom-actions">
+          <ChatStartButton onClick={onStartChat} />
+          {onGeneratePlan && <PlanStartButton onClick={onGeneratePlan} />}
+        </div>
+      </div>
     </main>
   )
 }

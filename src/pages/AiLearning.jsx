@@ -37,10 +37,13 @@ export default function AiLearning() {
   }
 
   const showGrowth = os.aiPage === 'select'
+  const hideTopBar = os.aiPage === 'report' || os.aiPage === 'chat'
+  const aiPageMode =
+    os.aiPage === 'report' ? ' os-page--ai-report' : os.aiPage === 'chat' ? ' os-page--ai-chat' : ''
 
   return (
-    <div className="os-page os-page--ai">
-      <OsTopBar title="AI学习" onBack={handleBack} />
+    <div className={`os-page os-page--ai${aiPageMode}`}>
+      {!hideTopBar && <OsTopBar title="AI学习" onBack={handleBack} />}
       {showGrowth && <DeviceGrowthHeader variant="asset" />}
 
       {os.aiPage === 'select' && (
@@ -60,10 +63,11 @@ export default function AiLearning() {
           lesson={os.lesson}
           onStartChat={os.startChat}
           onGeneratePlan={os.goToProposal}
+          onBack={handleBack}
         />
       )}
 
-      {os.aiPage === 'chat' && <ChatLearning />}
+      {os.aiPage === 'chat' && <ChatLearning onBack={handleBack} />}
 
       {os.aiPage === 'proposal' && (
         <AiTaskProposal

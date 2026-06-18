@@ -1,0 +1,991 @@
+@import './variables.css';
+
+/* ============================================================
+   全局视觉语言 — Apple 极简 · 韩国奶油 · 莫兰迪
+   320×240 严格容器内生效
+   ============================================================ */
+
+/* ---------- 页面壳：奶油底 ---------- */
+.os-page,
+.tutoring-page,
+.screen-content {
+  background: var(--color-cream);
+}
+
+.os-page--plan,
+.os-page--ai,
+.os-page--focus,
+.os-page--feedback {
+  background: var(--color-cream);
+}
+
+/* ---------- 顶栏 ---------- */
+.os-topbar,
+.top-bar {
+  height: var(--topbar-height);
+  padding: 0 var(--page-padding);
+  background: var(--color-cream);
+  border-bottom: none;
+}
+
+.os-topbar__back,
+.top-bar__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  margin: 0;
+  font-size: 22px;
+  font-weight: var(--font-weight-body);
+  line-height: 1;
+  color: var(--color-accent-orange);
+}
+
+.os-topbar__title,
+.top-bar__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-text-strong);
+}
+
+.os-topbar__spacer {
+  width: 28px;
+  height: 28px;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  height: var(--btn-height);
+  padding: 0 var(--page-padding-lg);
+  border-radius: var(--radius-card);
+  border: none;
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-strong);
+  background: var(--color-card-blue);
+  box-shadow: var(--shadow-press);
+}
+
+.btn--primary {
+  color: var(--color-text-inverse);
+  background: var(--color-accent-orange);
+  box-shadow: var(--shadow-press);
+}
+
+.btn--secondary {
+  background: var(--color-card-yellow);
+}
+
+.btn--accent {
+  background: var(--color-accent-yellow);
+  color: var(--color-text-strong);
+}
+
+.btn--ghost {
+  background: var(--color-card-blue);
+  box-shadow: none;
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: none;
+}
+
+/* ---------- 卡片 ---------- */
+.card,
+.list-item {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-blue);
+  box-shadow: var(--shadow-soft);
+  padding: var(--page-padding);
+}
+
+.card:nth-child(even),
+.list-item:nth-child(even) {
+  background: var(--color-card-yellow);
+}
+
+.card__title,
+.list-item__title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.card__desc,
+.list-item__desc {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+}
+
+.page-title {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-bold);
+}
+
+.page-subtitle {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+/* ---------- 日程计划页 ---------- */
+.os-page--plan {
+  padding: 0;
+}
+
+.os-week {
+  gap: 3px;
+  padding: 0 var(--page-padding) 2px;
+}
+
+.os-week__tab {
+  height: 24px;
+  padding: 0 2px;
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-blue);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-secondary);
+}
+
+.os-week__tab--on {
+  color: var(--color-text-inverse);
+  background: var(--color-accent-orange);
+  box-shadow: var(--shadow-press);
+}
+
+.os-week__tab--today:not(.os-week__tab--on) {
+  background: var(--color-card-yellow);
+  color: var(--color-accent-orange);
+}
+
+.os-page--plan .os-plan-view {
+  padding: 0 var(--page-padding);
+  box-sizing: border-box;
+}
+
+.os-plan-card {
+  width: 100%;
+  margin: 0 0 4px;
+  padding: 8px var(--page-padding) 6px;
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-blue);
+  box-shadow: var(--shadow-soft);
+  box-sizing: border-box;
+}
+
+.os-plan-card__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.os-plan-card__scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.os-plan-card__header,
+.list-header {
+  margin-bottom: 8px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.os-plan-card__list {
+  max-height: none;
+  overflow: visible;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.os-plan-card__title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-strong);
+}
+
+.os-plan-card__item {
+  width: 100%;
+  height: 50px !important;
+  min-height: 50px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  margin-bottom: 8px !important;
+  padding: 0 var(--page-padding);
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-cream);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  box-sizing: border-box;
+}
+
+.os-plan-card__item--done {
+  background: var(--color-card-yellow);
+  opacity: 0.85;
+}
+
+.os-plan-card__item--active {
+  background: var(--color-card-yellow);
+  box-shadow: inset 0 0 0 2px var(--color-accent-orange);
+}
+
+.os-plan-card__item--hint,
+.os-plan-card__item--demo {
+  border: none;
+  background: var(--color-card-yellow);
+  box-shadow: var(--shadow-soft);
+}
+
+.os-plan-card__time {
+  width: auto;
+  min-width: 36px;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-secondary);
+  text-align: center;
+}
+
+.os-plan-card__name {
+  flex: 1;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-strong);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.os-plan-card__hint-text {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+}
+
+.os-plan-card__btn,
+.os-plan-card__demo-btn {
+  height: var(--btn-height);
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-accent-orange);
+  color: var(--color-text-inverse);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+  box-shadow: var(--shadow-press);
+}
+
+.os-plan-card__btn {
+  height: 36px !important;
+  border-radius: 18px !important;
+  font-size: var(--font-size-body);
+}
+
+.os-plan-card__add-btn {
+  height: 24px;
+  padding: 0 10px;
+  border: none;
+  border-radius: 999px;
+  background: var(--color-card-yellow);
+  color: var(--color-accent-orange);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+  box-shadow: none;
+}
+
+.os-plan-modal__panel {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-cream);
+  box-shadow: var(--shadow-soft);
+}
+
+.os-plan-modal__btn {
+  height: var(--btn-height);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  border: none;
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-press);
+}
+
+/* ---------- AI 对话页 ---------- */
+.os-page--ai-chat {
+  padding: 0;
+}
+
+.os-page--ai .tutor-chat {
+  padding: 0 var(--page-padding) 6px;
+}
+
+.os-page--ai .tutor-chat__top {
+  margin-top: 4px;
+  padding-bottom: 2px;
+}
+
+.os-page--ai .tutor-chat__teacher,
+.os-page--ai .header-container {
+  height: 36px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.os-page--ai .tutor-chat__teacher-name {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.os-page--ai .tutor-chat__teacher-status {
+  font-size: 11px;
+  line-height: 1;
+}
+
+.os-page--ai .tutor-chat__suggestions,
+.os-page--ai .suggestions {
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
+
+.os-page--ai .tutor-chat__prompt {
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 13px;
+  font-size: 11px;
+}
+
+.os-page--ai .tutor-chat__input-row,
+.os-page--ai .input-bar {
+  margin-top: 4px;
+}
+
+.os-page--ai .tutor-chat__messages,
+.os-page--ai .chat-messages {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  gap: 8px;
+  padding-bottom: 45px;
+}
+
+.os-page--ai .tutor-chat__msg--ai {
+  width: 100%;
+}
+
+.os-page--ai .tutor-chat__msg-bubble--ai,
+.os-page--ai .ai-bubble {
+  padding: 8px 12px !important;
+}
+
+.os-page--ai .tutor-chat__msg-text,
+.os-page--ai .tutor-chat__thinking-text {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.tutor-chat {
+  padding: 0 var(--page-padding) var(--page-padding);
+}
+
+.tutor-chat__teacher {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-yellow);
+  box-shadow: var(--shadow-soft);
+}
+
+.tutor-chat__teacher-name {
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.tutor-chat__teacher-status {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.tutor-chat__screen {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-blue);
+}
+
+.tutor-chat__messages,
+.chat-messages {
+  scrollbar-width: none;
+}
+
+.tutor-chat__messages::-webkit-scrollbar,
+.chat-messages::-webkit-scrollbar {
+  display: none;
+}
+
+.tutor-chat__msg-bubble,
+.chat-bubble {
+  border-radius: 14px 14px 14px 4px;
+  border: none;
+}
+
+.tutor-chat__msg-bubble--ai,
+.ai-bubble {
+  padding: 8px 12px !important;
+  background: var(--color-card-blue);
+  box-shadow: var(--shadow-soft);
+}
+
+.tutor-chat__msg-text,
+.tutor-chat__thinking-text {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-text-strong);
+}
+
+.tutor-chat__msg-bubble--ai .tutor-chat__msg-text {
+  color: var(--color-text-strong);
+}
+
+.tutor-chat__prompt,
+.tutor-chat__input {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+}
+
+.tutor-chat__mic-btn,
+.tutor-chat__send-btn {
+  background: var(--color-accent-orange);
+  box-shadow: var(--shadow-press);
+}
+
+/* ---------- 今日收获报告 ---------- */
+.tutor-report {
+  padding: 0 var(--page-padding);
+}
+
+.os-page--ai-report {
+  padding: 0;
+}
+
+.os-page--ai .tutor-report__head {
+  margin-top: 4px;
+  padding: 0 var(--page-padding) 6px;
+}
+
+.os-page--ai .tutor-report__step {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.os-page--ai .tutor-report__scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 12px;
+}
+
+.os-page--ai .tutor-report__subtitle,
+.os-page--ai .summary-text {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 12px;
+}
+
+.os-page--ai .tutor-report__block {
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+}
+
+.os-page--ai .tutor-report__footer,
+.os-page--ai .bottom-actions {
+  margin-top: 4px;
+  padding: 8px 0 4px;
+}
+
+.os-page--ai .tutor-report__footer .tutor-hw-start--report-primary,
+.os-page--ai .tutor-report__footer .tutor-hw-start--report-secondary,
+.os-page--ai .bottom-actions .tutor-hw-start--report-primary,
+.os-page--ai .bottom-actions .tutor-hw-start--report-secondary {
+  height: 34px;
+}
+
+.tutor-report__step {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-orange);
+}
+
+.tutor-report__head-title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.tutor-report__block {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-blue);
+  padding: var(--page-padding-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+.tutor-report__block--golden {
+  background: var(--color-card-yellow);
+}
+
+.tutor-report__block--quiz {
+  background: var(--color-card-mint);
+}
+
+.tutor-report__label,
+.tutor-report__group-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-secondary);
+}
+
+.tutor-report__word-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: stretch;
+}
+
+.tutor-report__word-tag {
+  flex: 1 1 calc(50% - 4px);
+  min-width: calc(50% - 4px);
+  min-height: 44px;
+  padding: 10px 12px;
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-yellow);
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+}
+
+.tutor-report__word-tag-text {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-strong);
+}
+
+.tutor-report__word-tag--mint,
+.tutor-report__word-tag--pink,
+.tutor-report__word-tag--yellow,
+.tutor-report__word-tag--orange,
+.tutor-report__word-tag--lavender,
+.tutor-report__word-tag--sky {
+  border: none;
+  background: var(--color-card-yellow);
+}
+
+.tutor-report__golden-text {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.tutor-report__quiz-q {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.tutor-report__quiz-opt {
+  min-height: 36px;
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-cream);
+  box-shadow: var(--shadow-soft);
+}
+
+.tutor-report__quiz-opt-label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+}
+
+.tutor-hw-start__bezel {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-accent-orange);
+  box-shadow: var(--shadow-press);
+}
+
+.tutor-hw-start__label {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-inverse);
+}
+
+/* ---------- 选课文 / 分析 ---------- */
+.os-page--ai .tutor-select {
+  padding: 0 var(--page-padding) 0;
+}
+
+.tutor-select,
+.tutor-analyze {
+  padding: 0 var(--page-padding) var(--page-padding);
+}
+
+.tutor-select__footer {
+  position: relative;
+  z-index: 2;
+  margin-top: 6px;
+  padding-bottom: 6px;
+}
+
+.tutor-select__step {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+}
+
+.os-page--ai .tutor-select__step {
+  margin: 6px 0;
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.os-page--ai .tutor-analyze {
+  padding: 4px var(--page-padding) 6px;
+}
+
+.os-page--ai .tutor-analyze__heading {
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.os-page--ai .tutor-analyze__reader-title {
+  font-size: 14px;
+}
+
+.os-page--ai .tutor-analyze__text {
+  font-size: 11px;
+  line-height: 1.45;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.os-page--ai .tutor-analyze__task {
+  font-size: 11px;
+}
+
+.lesson-card {
+  width: 100%;
+  height: 90px !important;
+  min-height: 90px !important;
+  max-height: 90px !important;
+  border-radius: 12px;
+}
+
+.lesson-card__grade {
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.lesson-card__title {
+  font-size: 18px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tutor-analyze__text {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+}
+
+/* ---------- 番茄钟：奶油风 + 240px 高度适配 ---------- */
+.pomo-ref {
+  color: var(--color-text-strong);
+  background: var(--color-cream);
+}
+
+.pomo-ref__focus-dial,
+.pomo-ref__break-dial {
+  width: 96px;
+  height: 96px;
+}
+
+.pomo-ref__ready-dial {
+  width: 92px;
+  height: 92px;
+}
+
+.pomo-ref--focus .pomo-ref__main,
+.pomo-ref--break .pomo-ref__main {
+  padding-top: 0;
+  padding-bottom: 4px;
+  justify-content: space-between;
+}
+
+.pomo-ref__focus-head,
+.pomo-ref__break-head {
+  padding: 2px var(--page-padding) 0;
+}
+
+.pomo-ref__pill {
+  min-height: 22px;
+  padding: 0 10px;
+  font-size: var(--font-size-xs);
+}
+
+.pomo-ref__ctrl--pause-focus,
+.pomo-ref__ctrl--pause-break {
+  flex: 0 0 52px;
+  height: 32px;
+}
+
+/* 计时页改用 .pomo-timer-controls，隐藏旧控制栏样式冲突 */
+.pomo-ref--focus .pomo-ref__controls,
+.pomo-ref--break .pomo-ref__controls {
+  display: none;
+}
+
+.pomo-ref--focus .pomo-ref__glass,
+.pomo-ref--break .pomo-ref__timer--break {
+  display: none;
+}
+
+.pomo-ref__ctrl--next {
+  height: 32px;
+}
+
+.pomo-ref__ctrl--check,
+.pomo-ref__ctrl--skip {
+  flex: 0 0 32px;
+  height: 32px;
+  font-size: var(--font-size-body);
+}
+
+.pomo-ref__peach-num {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+}
+
+.pomo-ref__start-btn {
+  min-height: 36px;
+  max-width: 100%;
+}
+
+.pomo-ref .pomo-work__topbar {
+  min-height: 26px;
+  padding-top: 2px;
+}
+
+.pomo-ref__bg {
+  background: linear-gradient(180deg, #fdfbf7 0%, #f7f3eb 55%, #f0ebe3 100%);
+}
+
+.pomo-ref__bg-svg path,
+.pomo-ref__bg-svg circle {
+  opacity: 0.35;
+}
+
+.pomo-ref .pomo-work__topbar {
+  min-height: 28px;
+  padding: 4px var(--page-padding) 0;
+}
+
+.pomo-ref .pomo-work__topbar-title {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-strong);
+}
+
+.pomo-ref .pomo-work__icon-btn {
+  border: none;
+  background: var(--color-card-blue);
+  color: var(--color-text-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.pomo-ref__pill {
+  border: none;
+  background: var(--color-card-blue);
+  color: var(--color-text-strong);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+  backdrop-filter: none;
+}
+
+.pomo-ref__ready-task {
+  border: none;
+  background: var(--color-card-yellow);
+}
+
+.pomo-ref__ready-task-name {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-strong);
+}
+
+.pomo-ref__start-btn {
+  border: none;
+  background: var(--color-accent-orange);
+  box-shadow: var(--shadow-press);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.pomo-ref__timer {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-strong);
+}
+
+.pomo-ref__glass {
+  border: none;
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: none;
+  box-shadow: var(--shadow-soft);
+}
+
+.pomo-ref__ctrl {
+  border: none;
+  backdrop-filter: none;
+}
+
+.pomo-ref__ctrl--pause-focus {
+  background: var(--color-accent-orange);
+  box-shadow: var(--shadow-press);
+}
+
+.pomo-ref__ctrl--pause-break {
+  background: var(--color-accent-yellow);
+  box-shadow: var(--shadow-press);
+}
+
+.pomo-ref__ctrl--next {
+  background: var(--color-card-blue);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-strong);
+}
+
+.pomo-ref__break-title {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-strong);
+}
+
+.pomo-ref__settings-title {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+}
+
+.pomo-ref__settings-opt {
+  border: none;
+  background: var(--color-card-blue);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.pomo-ref__settings-opt--active {
+  background: var(--color-accent-orange);
+  color: var(--color-text-inverse);
+}
+
+.pomo-ref__daily {
+  border: none;
+  background: var(--color-card-yellow);
+}
+
+.pomo-ref__daily-cheer {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+  color: var(--color-text-strong);
+}
+
+.pomo-ref__task-list-item {
+  border: none;
+  background: var(--color-card-blue);
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+/* ---------- 学习反馈 / 提案 ---------- */
+.os-feedback__title {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+}
+
+.os-feedback__msg,
+.os-feedback__btn {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.os-proposal__title {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.os-proposal__card {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-blue);
+}
+
+/* ---------- 成长条 ---------- */
+.growth-strip--asset {
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--color-card-yellow);
+}
+
+.growth-strip--asset .growth-strip__value {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+.growth-strip--asset .growth-strip__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-body);
+}
+
+/* ---------- 待机页保持纯黑 ---------- */
+.standby {
+  background: #000;
+}
+
+.standby__clock {
+  font-size: 48px;
+}
+
+.standby__date,
+.standby__reminder {
+  font-size: var(--font-size-body);
+  font-weight: var(--font-weight-body);
+}
+
+/* ---------- 隐藏所有屏内滚动条 ---------- */
+.device-screen__content * {
+  scrollbar-width: none;
+}
+
+.device-screen__content *::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}

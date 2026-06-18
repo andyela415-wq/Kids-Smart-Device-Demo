@@ -1,0 +1,317 @@
+@import './variables.css';
+
+/* ============================================================
+   番茄计时页 — 互动成长型表盘（320×240 一屏完整）
+   ============================================================ */
+
+.pomo-ref--focus,
+.pomo-ref--break {
+  --pomo-buddy-h: 26px;
+  --pomo-stage-size: 96px;
+  --pomo-decor-h: 14px;
+  --pomo-ctrl-h: 28px;
+  overflow: hidden;
+}
+
+/* ---------- 学习小助手 ---------- */
+.pomo-buddy {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  height: var(--pomo-buddy-h);
+  padding-top: 2px;
+  box-sizing: content-box;
+}
+
+.pomo-buddy__svg {
+  width: 32px;
+  height: var(--pomo-buddy-h);
+  display: block;
+  filter: drop-shadow(0 1px 3px rgba(92, 100, 112, 0.1));
+}
+
+.pomo-buddy--active .pomo-buddy__svg {
+  animation: pomo-buddy-breathe 2.8s ease-in-out infinite;
+}
+
+@keyframes pomo-buddy-breathe {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-1px) scale(1.03);
+  }
+}
+
+/* ---------- 表盘主体（固定高度，禁止 flex 压缩） ---------- */
+.pomo-timer-dial {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  overflow: visible;
+}
+
+.pomo-timer-dial__upper {
+  flex: 0 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  overflow: visible;
+}
+
+.pomo-timer-dial__stage {
+  position: relative;
+  width: var(--pomo-stage-size);
+  height: var(--pomo-stage-size);
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.pomo-timer-dial__core {
+  position: absolute;
+  inset: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 130, 58, 0.08),
+    0 3px 10px rgba(92, 100, 112, 0.07);
+}
+
+.pomo-timer-dial--break .pomo-timer-dial__core {
+  box-shadow:
+    inset 0 0 0 2px rgba(111, 207, 122, 0.12),
+    0 3px 10px rgba(92, 100, 112, 0.07);
+}
+
+.pomo-timer-dial__time {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  color: var(--color-text-strong);
+}
+
+/* ---------- 手绘感圆环 ---------- */
+.pomo-ref__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+
+.pomo-ref__ring-track {
+  stroke: rgba(255, 130, 58, 0.16);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 4 7;
+}
+
+.pomo-ref__ring--break .pomo-ref__ring-track {
+  stroke: rgba(111, 207, 122, 0.22);
+}
+
+.pomo-ref__ring-arc {
+  stroke: #ff823a;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s linear;
+}
+
+.pomo-ref__ring--break .pomo-ref__ring-arc {
+  stroke: #6fcf7a;
+}
+
+.pomo-ref__ring-dot {
+  fill: #ff823a;
+}
+
+.pomo-ref__ring--break .pomo-ref__ring-dot {
+  fill: #6fcf7a;
+}
+
+/* ---------- 星星 / 小花装饰 ---------- */
+.pomo-timer-decor {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  height: var(--pomo-decor-h);
+  margin-top: 3px;
+  overflow: visible;
+}
+
+.pomo-timer-decor__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  color: rgba(92, 100, 112, 0.18);
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.pomo-timer-decor__item--lit {
+  color: var(--color-accent-yellow);
+  transform: scale(1.06);
+}
+
+.pomo-timer-decor--break .pomo-timer-decor__item--lit {
+  color: #98e4a8;
+}
+
+.pomo-timer-decor__svg {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+
+/* ---------- 胶囊控制栏 ---------- */
+.pomo-timer-controls {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 296px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 0 4px;
+}
+
+.pomo-timer-btn {
+  flex: 1 1 0;
+  min-width: 0;
+  height: var(--pomo-ctrl-h);
+  padding: 0 6px;
+  border: none;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+  color: var(--color-text-inverse);
+  cursor: pointer;
+  box-shadow: var(--shadow-press);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pomo-timer-btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+.pomo-timer-btn__icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.pomo-timer-btn--pause {
+  background: var(--color-accent-orange);
+}
+
+.pomo-timer-controls--break .pomo-timer-btn--pause {
+  background: #ffb347;
+  color: var(--color-text-strong);
+}
+
+.pomo-timer-btn--next {
+  background: var(--color-card-blue);
+  color: var(--color-text-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.pomo-timer-btn--done {
+  flex: 0 0 auto;
+  min-width: 52px;
+  padding: 0 8px;
+  background: #6fcf7a;
+}
+
+/* ---------- 专注 / 休息页布局 ---------- */
+.pomo-ref--focus .pomo-ref__main,
+.pomo-ref--break .pomo-ref__main {
+  flex: 1 1 0;
+  min-height: 0;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--page-padding) 4px;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.pomo-ref__focus-head,
+.pomo-ref__break-head {
+  flex-shrink: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 24px;
+  padding: 2px var(--page-padding) 0;
+}
+
+.pomo-ref__break-head .pomo-ref__back-chip {
+  position: absolute;
+  left: var(--page-padding);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.pomo-ref__back-chip {
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: var(--color-card-blue);
+  color: var(--color-text-strong);
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pomo-ref__pill--focus {
+  background: #fff0e6;
+  color: var(--color-accent-orange-deep);
+}
+
+.pomo-ref__pill--break {
+  background: #eefbf0;
+  color: #3d8b52;
+}
+
+.pomo-ref__pill--count {
+  background: var(--color-card-yellow);
+  color: var(--color-text-strong);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pomo-buddy--active .pomo-buddy__svg,
+  .pomo-ref__ring-arc,
+  .pomo-timer-decor__item {
+    animation: none !important;
+    transition: none !important;
+  }
+}

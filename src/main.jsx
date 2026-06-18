@@ -11,9 +11,13 @@ import './styles/home-face.css'
 import './styles/growth.css'
 import './styles/tutoring.css'
 import './styles/pomodoro.css'
+import './styles/pomodoro-ref.css'
+import './styles/pomodoro-timer.css'
+import './styles/pomodoro-done.css'
+import './styles/pomodoro-pick.css'
 import './styles/os.css'
 import './styles/standby.css'
-import './styles/hardware-home.css'
+import './styles/design-system.css'
 
 seedDefaultPlansIfEmpty()
 syncAllPlans()

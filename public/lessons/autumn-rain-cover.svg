@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="autumn-sky" x1="140" y1="0" x2="140" y2="120">
+      <stop offset="0%" stop-color="#8ecae6"/>
+      <stop offset="55%" stop-color="#cdb4db"/>
+      <stop offset="100%" stop-color="#ffb4a2"/>
+    </linearGradient>
+    <linearGradient id="autumn-hill" x1="140" y1="70" x2="140" y2="120">
+      <stop offset="0%" stop-color="#95d5b2"/>
+      <stop offset="100%" stop-color="#52b788"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="120" fill="url(#autumn-sky)"/>
+  <ellipse cx="60" cy="92" rx="70" ry="28" fill="url(#autumn-hill)" opacity="0.85"/>
+  <ellipse cx="220" cy="98" rx="80" ry="32" fill="url(#autumn-hill)" opacity="0.75"/>
+  <path d="M200 78 C210 55 235 48 252 62 C260 70 255 82 240 86 C225 90 205 88 200 78Z" fill="#f4a261" opacity="0.9"/>
+  <rect x="228" y="62" width="8" height="26" rx="3" fill="#8d5524"/>
+  <circle cx="232" cy="52" r="22" fill="#e76f51" opacity="0.95"/>
+  <circle cx="218" cy="48" r="16" fill="#f4a261" opacity="0.9"/>
+  <circle cx="246" cy="50" r="14" fill="#e9c46a" opacity="0.85"/>
+  <path d="M40 70 Q48 45 58 70" stroke="#2d6a4f" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="58" cy="42" r="18" fill="#ffb703" opacity="0.95"/>
+  <circle cx="44" cy="48" r="14" fill="#fb8500" opacity="0.9"/>
+  <line x1="12" y1="8" x2="10" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="28" y1="12" x2="26" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="44" y1="8" x2="42" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="60" y1="12" x2="58" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="76" y1="8" x2="74" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="92" y1="12" x2="90" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="108" y1="8" x2="106" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="124" y1="12" x2="122" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="140" y1="8" x2="138" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="156" y1="12" x2="154" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="172" y1="8" x2="170" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="188" y1="12" x2="186" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="204" y1="8" x2="202" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="220" y1="12" x2="218" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="236" y1="8" x2="234" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="252" y1="12" x2="250" y2="26" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="268" y1="8" x2="266" y2="22" stroke="rgba(255,255,255,0.55)" stroke-width="1.2" stroke-linecap="round"/>
+  <ellipse cx="30" cy="28" rx="4" ry="5.6" fill="#ffb703" opacity="0.9" transform="rotate(0 30 28)"/>
+  <ellipse cx="95" cy="18" rx="3.5" ry="4.9" fill="#e76f51" opacity="0.9" transform="rotate(24 95 18)"/>
+  <ellipse cx="150" cy="32" rx="4" ry="5.6" fill="#ffd166" opacity="0.9" transform="rotate(48 150 32)"/>
+  <ellipse cx="185" cy="14" rx="3" ry="4.2" fill="#06d6a0" opacity="0.9" transform="rotate(72 185 14)"/>
+  <ellipse cx="250" cy="24" rx="3.5" ry="4.9" fill="#fb8500" opacity="0.9" transform="rotate(96 250 24)"/>
+  <ellipse cx="120" cy="12" rx="3" ry="4.2" fill="#ef476f" opacity="0.9" transform="rotate(120 120 12)"/>
+  <circle cx="248" cy="18" r="14" fill="rgba(255,255,255,0.25)"/>
+</svg>
